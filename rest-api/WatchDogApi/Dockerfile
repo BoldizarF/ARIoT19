@@ -3,20 +3,20 @@ WORKDIR /app
 
 # copy csproj and restore as distinct layers
 COPY *.sln .
-COPY WatchDog/*.csproj ./WatchDog/
+COPY WatchDogApi/*.csproj ./WatchDogApi/
 RUN dotnet restore
 
 # copy everything else and build app
-COPY WatchDog/. ./WatchDog/
-WORKDIR /app/WatchDog
+COPY WatchDogApi/. ./WatchDogApi/
+WORKDIR /app/WatchDogApi
 RUN dotnet publish -c Release -o out
 
 FROM microsoft/dotnet:2.2-aspnetcore-runtime AS runtime
 WORKDIR /app
-COPY --from=build /app/WatchDog/out ./
+COPY --from=build /app/WatchDogApi/out ./
 
 EXPOSE 80
-ENTRYPOINT ["dotnet", "WatchDog.dll"]
+ENTRYPOINT ["dotnet", "WatchDogApi.dll"]
 
 # docker build -t watchdog.api.v1 .
 # docker images ls
