@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="090d8dcf-3a91-4287-9fa5-5777db8fc80f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WatchDogApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WatchDogApi/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WatchDogApi/Controllers/HeartRateStorage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WatchDogApi/Controllers/ImageStorage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WatchDogApi/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WatchDogApi/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WatchDogApi/Controllers/ValuesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WatchDogApi/Controllers/ValuesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WatchDogApi/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WatchDogApi/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WatchDogApi/WatchDogApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WatchDogApi/WatchDogApi.csproj" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,56 +15,55 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WatchDogApi/Controllers/ValuesController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+            <state relative-caret-position="432">
+              <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
               <folding>
-                <marker date="1551953844462" expanded="false" signature="6:128" ph="..." />
-                <marker date="1551953844462" expanded="true" signature="163:839" ph="{...}" />
-                <marker date="1551953844462" expanded="true" signature="268:837" ph="{...}" />
-                <marker date="1551953844462" expanded="true" signature="373:447" ph="{...}" />
-                <marker date="1551953844462" expanded="true" signature="550:598" ph="{...}" />
-                <marker date="1551953844462" expanded="true" signature="695:715" ph="{...}" />
-                <marker date="1551953844462" expanded="true" signature="811:831" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WatchDogApi/Program.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-              <folding>
-                <marker date="1551953440063" expanded="false" signature="6:255" ph="..." />
-                <marker date="1551953440063" expanded="true" signature="278:605" ph="{...}" />
-                <marker date="1551953440063" expanded="true" signature="305:603" ph="{...}" />
-                <marker date="1551953440063" expanded="true" signature="358:432" ph="{...}" />
+                <marker date="1551955397209" expanded="false" signature="6:128" ph="..." />
+                <marker date="1551955397209" expanded="true" signature="163:767" ph="{...}" />
+                <marker date="1551955397209" expanded="true" signature="268:765" ph="{...}" />
+                <marker date="1551955397209" expanded="true" signature="379:444" ph="{...}" />
+                <marker date="1551955397209" expanded="true" signature="548:617" ph="{...}" />
+                <marker date="1551955397209" expanded="true" signature="698:759" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/WatchDogApi/Startup.cs">
+        <entry file="file://$PROJECT_DIR$/WatchDogApi/Controllers/HeartRateStorage.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="29" column="37" lean-forward="true" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+            <state relative-caret-position="448">
+              <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
               <folding>
-                <marker date="1551953905065" expanded="false" signature="6:402" ph="..." />
-                <marker date="1551953905065" expanded="true" signature="425:1887" ph="{...}" />
-                <marker date="1551953905065" expanded="true" signature="452:1885" ph="{...}" />
-                <marker date="1551953905065" expanded="true" signature="511:574" ph="{...}" />
-                <marker date="1551953905065" expanded="true" signature="797:1399" ph="{...}" />
-                <marker date="1551953905065" expanded="true" signature="944:1046" ph="{...}" />
-                <marker date="1551953905065" expanded="true" signature="1100:1387" ph="{...}" />
-                <marker date="1551953905065" expanded="true" signature="1227:1297" ph="{...}" />
-                <marker date="1551953905065" expanded="true" signature="1587:1879" ph="{...}" />
-                <marker date="1551953905065" expanded="true" signature="1630:1867" ph="{...}" />
+                <marker date="1551956238304" expanded="false" signature="6:47" ph="..." />
+                <marker date="1551956238304" expanded="true" signature="82:924" ph="{...}" />
+                <marker date="1551956238304" expanded="true" signature="125:922" ph="{...}" />
+                <marker date="1551956238304" expanded="true" signature="467:487" ph="{...}" />
+                <marker date="1551956238304" expanded="true" signature="541:683" ph="{...}" />
+                <marker date="1551956238304" expanded="true" signature="752:808" ph="{...}" />
+                <marker date="1551956238304" expanded="true" signature="859:916" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WatchDogApi/Controllers/ImageStorage.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+              <folding>
+                <marker date="1551955390637" expanded="false" signature="6:47" ph="..." />
+                <marker date="1551955390637" expanded="true" signature="82:866" ph="{...}" />
+                <marker date="1551955390637" expanded="true" signature="121:864" ph="{...}" />
+                <marker date="1551955390637" expanded="true" signature="434:454" ph="{...}" />
+                <marker date="1551955390637" expanded="true" signature="512:652" ph="{...}" />
+                <marker date="1551955390637" expanded="true" signature="712:759" ph="{...}" />
+                <marker date="1551955390637" expanded="true" signature="810:858" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -75,14 +76,18 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/WatchDogApi/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WatchDogApi/Controllers/HeartRateStorage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WatchDogApi/Controllers/ImageStorage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WatchDogApi/Controllers/ValuesController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WatchDogApi/Startup.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/WatchDogApi/Controllers/ValuesController.cs" />
         <option value="$PROJECT_DIR$/WatchDogApi/Startup.cs" />
+        <option value="$PROJECT_DIR$/WatchDogApi/Controllers/ImageStorage.cs" />
+        <option value="$PROJECT_DIR$/WatchDogApi/Controllers/ValuesController.cs" />
+        <option value="$PROJECT_DIR$/WatchDogApi/Controllers/HeartRateStorage.cs" />
       </list>
     </option>
   </component>
@@ -98,7 +103,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="FileSystemExplorer" />
       <pane id="AssemblyExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
@@ -123,6 +127,7 @@
         </subPane>
         <option name="show-all-files" value="false" />
       </pane>
+      <pane id="FileSystemExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -168,11 +173,12 @@
       <option name="presentableId" value="Default" />
       <updated>1551953428986</updated>
       <workItem from="1551953432028" duration="486000" />
+      <workItem from="1551955264246" duration="976000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="486000" />
+    <option name="totallyTimeSpent" value="1462000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -187,21 +193,11 @@
     <frame x="-6" y="-6" width="1933" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info id="Image Layers" />
-      <window_info id="Capture Tool" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2496" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25226668" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="NuGet" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Unit Tests" />
-      <window_info anchor="bottom" id="REST Client" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Performance Profiler" />
-      <window_info active="true" anchor="bottom" id="Build" visible="true" weight="0.32936078" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -209,19 +205,29 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Errors In Solution" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Unit Tests Coverage" />
+      <window_info anchor="bottom" id="NuGet" order="7" />
+      <window_info anchor="bottom" id="Performance Profiler" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="bottom" id="Unit Tests" order="12" />
+      <window_info anchor="bottom" id="REST Client" order="13" />
+      <window_info anchor="bottom" id="Terminal" order="14" />
+      <window_info anchor="bottom" id="Event Log" order="15" side_tool="true" />
+      <window_info anchor="bottom" id="Build" order="16" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Errors In Solution" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="6" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -234,22 +240,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WatchDogApi/Controllers/ValuesController.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-          <folding>
-            <marker date="1551953844462" expanded="false" signature="6:128" ph="..." />
-            <marker date="1551953844462" expanded="true" signature="163:839" ph="{...}" />
-            <marker date="1551953844462" expanded="true" signature="268:837" ph="{...}" />
-            <marker date="1551953844462" expanded="true" signature="373:447" ph="{...}" />
-            <marker date="1551953844462" expanded="true" signature="550:598" ph="{...}" />
-            <marker date="1551953844462" expanded="true" signature="695:715" ph="{...}" />
-            <marker date="1551953844462" expanded="true" signature="811:831" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WatchDogApi/appsettings.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -262,7 +252,6 @@
           <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
           <folding>
             <marker date="1551953440063" expanded="false" signature="6:255" ph="..." />
-            <marker date="1551953440063" expanded="true" signature="278:605" ph="{...}" />
             <marker date="1551953440063" expanded="true" signature="305:603" ph="{...}" />
             <marker date="1551953440063" expanded="true" signature="358:432" ph="{...}" />
           </folding>
@@ -271,8 +260,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/WatchDogApi/Startup.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="29" column="37" lean-forward="true" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+        <state relative-caret-position="258">
+          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
           <folding>
             <marker date="1551953905065" expanded="false" signature="6:402" ph="..." />
             <marker date="1551953905065" expanded="true" signature="425:1887" ph="{...}" />
@@ -284,6 +273,53 @@
             <marker date="1551953905065" expanded="true" signature="1227:1297" ph="{...}" />
             <marker date="1551953905065" expanded="true" signature="1587:1879" ph="{...}" />
             <marker date="1551953905065" expanded="true" signature="1630:1867" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WatchDogApi/Controllers/ImageStorage.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+          <folding>
+            <marker date="1551955390637" expanded="false" signature="6:47" ph="..." />
+            <marker date="1551955390637" expanded="true" signature="82:866" ph="{...}" />
+            <marker date="1551955390637" expanded="true" signature="121:864" ph="{...}" />
+            <marker date="1551955390637" expanded="true" signature="434:454" ph="{...}" />
+            <marker date="1551955390637" expanded="true" signature="512:652" ph="{...}" />
+            <marker date="1551955390637" expanded="true" signature="712:759" ph="{...}" />
+            <marker date="1551955390637" expanded="true" signature="810:858" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WatchDogApi/Controllers/ValuesController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+          <folding>
+            <marker date="1551955397209" expanded="false" signature="6:128" ph="..." />
+            <marker date="1551955397209" expanded="true" signature="163:767" ph="{...}" />
+            <marker date="1551955397209" expanded="true" signature="268:765" ph="{...}" />
+            <marker date="1551955397209" expanded="true" signature="379:444" ph="{...}" />
+            <marker date="1551955397209" expanded="true" signature="548:617" ph="{...}" />
+            <marker date="1551955397209" expanded="true" signature="698:759" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WatchDogApi/Controllers/HeartRateStorage.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+          <folding>
+            <marker date="1551956238304" expanded="false" signature="6:47" ph="..." />
+            <marker date="1551956238304" expanded="true" signature="82:924" ph="{...}" />
+            <marker date="1551956238304" expanded="true" signature="125:922" ph="{...}" />
+            <marker date="1551956238304" expanded="true" signature="467:487" ph="{...}" />
+            <marker date="1551956238304" expanded="true" signature="541:683" ph="{...}" />
+            <marker date="1551956238304" expanded="true" signature="752:808" ph="{...}" />
+            <marker date="1551956238304" expanded="true" signature="859:916" ph="{...}" />
           </folding>
         </state>
       </provider>
