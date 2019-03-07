@@ -1,4 +1,4 @@
-package com.aptiv.watchdogapp.image
+package com.aptiv.watchdogapp.data.image
 
 data class CapturedImage(
     val value: String,

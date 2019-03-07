@@ -1,4 +1,4 @@
-package com.aptiv.watchdogapp.health
+package com.aptiv.watchdogapp.data.health
 
 data class HeartRateValue(
     val value: Int,

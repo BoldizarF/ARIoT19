@@ -1,6 +1,6 @@
-package com.aptiv.watchdogapp.image
+package com.aptiv.watchdogapp.data.image.remote
 
-import com.aptiv.watchdogapp.WatchDogApiService
+import com.aptiv.watchdogapp.data.WatchDogApiService
 
 class ImageRemoteDataStore
 

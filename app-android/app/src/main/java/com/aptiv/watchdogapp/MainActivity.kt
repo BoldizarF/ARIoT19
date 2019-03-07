@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aptiv.watchdogapp.health.HealthRepository
-import com.aptiv.watchdogapp.image.CapturedImage
-import com.aptiv.watchdogapp.image.ImageRepository
+import com.aptiv.watchdogapp.data.RepositoryFactory
+import com.aptiv.watchdogapp.data.health.HealthRepository
+import com.aptiv.watchdogapp.data.image.ImageRepository
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.jjoe64.graphview.GraphView
