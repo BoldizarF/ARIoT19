@@ -35,9 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         setupGraph()
         setupReycleView()
-        findViewById<Button>(R.id.refresh_btn).setOnClickListener {
-            refreshData()
-        }
+        bindControlButtons()
 
         healthRepository = RepositoryFactory.createHealthRepository(applicationContext)
         imageRepository = RepositoryFactory.createImagesRepository(applicationContext)
@@ -87,6 +85,15 @@ class MainActivity : AppCompatActivity() {
             if (result.isEmpty()) return@launch
 
             adapter.addImages(result)
+        }
+    }
+
+    private fun bindControlButtons() {
+        findViewById<Button>(R.id.refresh_btn).setOnClickListener {
+            refreshData()
+        }
+        findViewById<Button>(R.id.signout_btn).setOnClickListener {
+            finish()
         }
     }
 }

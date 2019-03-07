@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         tools:context=".LoginActivity">
 
-    <EditText android:layout_width="200dp" android:layout_height="50dp" app:layout_constraintEnd_toEndOf="parent"
+    <EditText android:layout_width="250dp" android:layout_height="50dp" app:layout_constraintEnd_toEndOf="parent"
               android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
               android:layout_marginStart="8dp"
               android:inputType="number"
@@ -18,17 +18,14 @@
             android:text="Login"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:id="@+id/login_btn" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/editText"/>
+            android:id="@+id/login_btn"
+            app:layout_constraintEnd_toEndOf="@+id/editText" app:layout_constraintStart_toStartOf="@+id/editText"
+            android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/textView"/>
     <TextView
             android:text="Hint: APTIV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:layout_marginBottom="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/editText"/>
+            app:layout_constraintTop_toBottomOf="@+id/editText" android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/editText" app:layout_constraintStart_toStartOf="@+id/editText"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

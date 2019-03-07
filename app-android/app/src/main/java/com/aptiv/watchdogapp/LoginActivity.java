@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String keyCode = editText.getText().toString();
                 if (keyCode.equals(SECRET_KEY_CODE)) {
+                    editText.setText("");
                     openMainActivity();
                 }
                 else {
