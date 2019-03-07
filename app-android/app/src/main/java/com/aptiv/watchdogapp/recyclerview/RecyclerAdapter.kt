@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import android.util.Base64
 import android.widget.ImageView
 
-
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.PhotoHolder>()  {
 
     private var photos = ArrayList<CapturedImage>()
@@ -31,11 +30,9 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.PhotoHolder>()  {
         notifyDataSetChanged()
     }
 
-
     class PhotoHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val temp: TextView = view.findViewById(R.id.itemDate)
         private val image: ImageView = view.findViewById(R.id.itemImage)
-
 
         fun bindPhoto(photo: CapturedImage) {
             val imageByteArray = Base64.decode(photo.value, Base64.DEFAULT)
