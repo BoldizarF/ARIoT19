@@ -5,43 +5,61 @@ import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aptiv.watchdogapp.health.HealthRepository
-import com.aptiv.watchdogapp.health.HealthRepositoryFactory
-import com.aptiv.watchdogapp.recyclerview.RecyclerAdapter
+import com.aptiv.watchdogapp.image.CapturedImage
+import com.aptiv.watchdogapp.image.ImageRepository
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.jjoe64.graphview.GraphView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
+    private val uiScope = CoroutineScope(Dispatchers.Main)
+    private val bgContext = Default
+
+    private lateinit var graphView: GraphView
+
     private lateinit var healthRepository: HealthRepository
+    private lateinit var imageRepository: ImageRepository
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupGraph()
+        setupReycleView()
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recycle_view)
+        healthRepository = RepositoryFactory.createHealthRepository(applicationContext)
+        imageRepository = RepositoryFactory.createImagesRepository(applicationContext)
 
-        recyclerView.layoutManager = GridLayoutManager(this, 4)
-
-        healthRepository = HealthRepositoryFactory.create(this.applicationContext)
-
-        addDummyData()
+        retrieveHeartRateData()
     }
 
-    // http://www.android-graphview.org/simple-graph/
-    private fun addDummyData() {
-        val graph = findViewById<GraphView>(R.id.graph)
+    private fun setupReycleView() {
+        val recyclerView = findViewById<RecyclerView>(R.id.recycle_view)
+        recyclerView.layoutManager = GridLayoutManager(this, 4)
+    }
 
-        val series = LineGraphSeries(
-            arrayOf(
-                DataPoint(0.0, 1.0),
-                DataPoint(1.0, 5.0),
-                DataPoint(2.0, 3.0),
-                DataPoint(3.0, 2.0),
-                DataPoint(4.0, 6.0)
-            )
-        )
+    private fun setupGraph() {
+        // http://www.android-graphview.org/simple-graph/
+        graphView = findViewById(R.id.graph)
+    }
 
-        graph.addSeries(series)
+    private fun retrieveHeartRateData() = uiScope.launch {
+        val result = withContext(bgContext) {
+            healthRepository.getValues()
+        }
+
+        if (result.isEmpty()) return@launch
+
+        val dataPoints = result.mapIndexed { index, heartRateValue ->
+            DataPoint(index.toDouble(), heartRateValue.value.toDouble())
+        }.toTypedArray()
+
+        graphView.addSeries(LineGraphSeries(dataPoints))
     }
 }

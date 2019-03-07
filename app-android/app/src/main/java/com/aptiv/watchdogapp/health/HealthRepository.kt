@@ -6,15 +6,13 @@ class HealthRepository
         private val cacheDataStore: HealthCacheDataStore
     ) {
 
-
-    fun getValues(): List<HeartRateValue> {
-        val remoteValues = remoteDataStore.getRecentHeartRates().map {
-            HeartRateValue(it.second, it.first)
+    suspend fun getValues(): List<HeartRateValue> {
+        val remoteValues = remoteDataStore.getRecentHeartRates().entries.map {
+            HeartRateValue(it.value, it.key)
         }
 
         cacheDataStore.addHeartRateValues(remoteValues)
 
-        return cacheDataStore.getAllHeartRateValues()
+        return cacheDataStore.getAllHeartRateValues().sortedBy { it.timestamp }
     }
-
 }

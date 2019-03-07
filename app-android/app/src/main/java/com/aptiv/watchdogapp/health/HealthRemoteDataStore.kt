@@ -1,9 +1,15 @@
 package com.aptiv.watchdogapp.health
 
-class HealthRemoteDataStore {
+import com.aptiv.watchdogapp.WatchDogApiService
 
-    fun getRecentHeartRates(): List<Pair<String, Int>> {
-        return emptyList()
+class HealthRemoteDataStore
+
+    constructor(
+        private val api: WatchDogApiService
+    ) {
+
+    suspend fun getRecentHeartRates(): Map<Long, Int> {
+        return api.getLatestHeartRateValues().await()
     }
 
 }
