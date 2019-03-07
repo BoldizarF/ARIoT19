@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aptiv.watchdogapp.data.RepositoryFactory
 import com.aptiv.watchdogapp.data.health.HealthRepository
 import com.aptiv.watchdogapp.data.image.ImageRepository
-import com.aptiv.watchdogapp.recyclerview.RecyclerAdapter
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.jjoe64.graphview.GraphView
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var healthRepository: HealthRepository
     private lateinit var imageRepository: ImageRepository
-    private lateinit var adapter : RecyclerAdapter
+    private lateinit var adapter : ImageAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupReycleView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recycle_view)
         recyclerView.layoutManager = GridLayoutManager(this, 3)
-        adapter = RecyclerAdapter()
+        adapter = ImageAdapter()
         recyclerView.adapter = adapter
     }
 

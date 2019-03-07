@@ -1,25 +1,30 @@
-package com.aptiv.watchdogapp.recyclerview
+package com.aptiv.watchdogapp
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.aptiv.watchdogapp.R
 import com.aptiv.watchdogapp.data.image.CapturedImage
 import com.bumptech.glide.Glide
 import android.util.Base64
 import android.widget.ImageView
 
-class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.PhotoHolder>()  {
+class ImageAdapter : RecyclerView.Adapter<ImageAdapter.PhotoHolder>()  {
 
     private var photos = ArrayList<CapturedImage>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.PhotoHolder {
-        return PhotoHolder(LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoHolder {
+        return PhotoHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.row_image,
+                parent,
+                false
+            )
+        )
     }
 
-    override fun onBindViewHolder(holder: RecyclerAdapter.PhotoHolder, position: Int) {
+    override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
         holder.bindPhoto(photos[position])
     }
 
