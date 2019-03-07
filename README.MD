@@ -1,5 +1,5 @@
 # ARIoT19 - Cerberus the guard dog
-The complete Aptiv Code Constructors Artic IoT Challenge 2019 contribution
+The complete contribution from APTIV Code Constructors Artic IoT Challenge 2019
 
 ## Getting Started
 
@@ -13,7 +13,7 @@ The project uses a large number of different microcontrollers and other platform
 ```
 Arduino IDE
 Android studio with Android Oreo
-ssh
+SSH
 ```
 
 #### Hardware
@@ -36,8 +36,17 @@ Temperature sensor
 
 ### Installing
 
-The required software can be found under here:
+The required software can be found through these links:
+```
+Android studio: https://developer.android.com/studio
+Arduino IDE: https://www.arduino.cc/en/Main/Software
+SSH is included with most operating systems
+```
 
+The different hardwares are connected like this:
+```
+
+```
 
 Say what the step will be
 
