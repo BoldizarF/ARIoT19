@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         imageRepository = RepositoryFactory.createImagesRepository(applicationContext)
 
         retrieveHeartRateData()
+        retrieveImages()
     }
 
     private fun setupReycleView() {
@@ -53,17 +54,31 @@ class MainActivity : AppCompatActivity() {
         graphView = findViewById(R.id.graph)
     }
 
-    private fun retrieveHeartRateData() = uiScope.launch {
-        val result = withContext(bgContext) {
-            healthRepository.getValues()
+    private fun retrieveHeartRateData() {
+        uiScope.launch {
+            val result = withContext(bgContext) {
+                healthRepository.getValues()
+            }
+
+            if (result.isEmpty()) return@launch
+
+            val dataPoints = result.mapIndexed { index, heartRateValue ->
+                DataPoint(index.toDouble(), heartRateValue.value.toDouble())
+            }.toTypedArray()
+
+            graphView.addSeries(LineGraphSeries(dataPoints))
         }
+    }
 
-        if (result.isEmpty()) return@launch
+    private fun retrieveImages() {
+        uiScope.launch {
+            val result = withContext(bgContext) {
+                imageRepository.getValues()
+            }
 
-        val dataPoints = result.mapIndexed { index, heartRateValue ->
-            DataPoint(index.toDouble(), heartRateValue.value.toDouble())
-        }.toTypedArray()
+            if (result.isEmpty()) return@launch
 
-        graphView.addSeries(LineGraphSeries(dataPoints))
+            // TODO add result to recycleview adapter
+        }
     }
 }
