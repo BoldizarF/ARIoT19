@@ -1,42 +1,53 @@
 package com.aptiv.watchdogapp.recyclerview
 
-import android.content.Intent
-import android.provider.ContactsContract.CommonDataKinds.Photo
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aptiv.watchdogapp.R
+import com.aptiv.watchdogapp.data.image.CapturedImage
+import com.bumptech.glide.Glide
+import android.util.Base64
+import android.widget.ImageView
 
-class RecyclerAdapter(private val photos: ArrayList<Photo>) : RecyclerView.Adapter<RecyclerAdapter.PhotoHolder>()  {
+
+class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.PhotoHolder>()  {
+
+    private var photos = ArrayList<CapturedImage>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.PhotoHolder {
         return PhotoHolder(LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false))
     }
 
-    override fun getItemCount() = photos.size
-
     override fun onBindViewHolder(holder: RecyclerAdapter.PhotoHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        holder.bindPhoto(photos[position])
     }
 
-    class PhotoHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-        private var view: View = v
-        private var photo: Photo? = null
+    override fun getItemCount() = photos.size
 
-        init {
-            v.setOnClickListener(this)
-        }
+    fun addImages(newItems: List<CapturedImage>) {
+        photos.addAll(newItems)
+        notifyDataSetChanged()
+    }
 
-        override fun onClick(v: View) {
-        }
 
-        companion object {
-            private val PHOTO_KEY = "PHOTO"
-        }
+    class PhotoHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+        private val temp: TextView = view.findViewById(R.id.itemDate)
+        private val image: ImageView = view.findViewById(R.id.itemImage)
 
-        fun bindPhoto(photo: Photo) {
-            this.photo = photo
+
+        fun bindPhoto(photo: CapturedImage) {
+            val imageByteArray = Base64.decode(photo.value, Base64.DEFAULT)
+
+            Glide.with(view.context)
+                .asBitmap()
+                .load(imageByteArray)
+                .into(image)
+
+
+            temp.text = photo.timestamp.toString()
         }
     }
 }
+

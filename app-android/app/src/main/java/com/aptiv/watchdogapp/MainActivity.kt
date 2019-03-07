@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var healthRepository: HealthRepository
     private lateinit var imageRepository: ImageRepository
+    private lateinit var adapter : RecyclerAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,11 +43,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupReycleView() {
-/*        val data = arrayOf("a", "b", "c")
         val recyclerView = findViewById<RecyclerView>(R.id.recycle_view)
         recyclerView.layoutManager = GridLayoutManager(this, 4)
-        val adapter = RecyclerAdapter(this, data)
-        recyclerView.adapter = adapter*/
+        adapter = RecyclerAdapter()
+        recyclerView.adapter = adapter
     }
 
     private fun setupGraph() {
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 
             if (result.isEmpty()) return@launch
 
-            // TODO add result to recycleview adapter
+            adapter.addImages(result)
         }
     }
 }
