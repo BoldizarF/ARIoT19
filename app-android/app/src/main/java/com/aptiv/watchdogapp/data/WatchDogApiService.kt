@@ -1,4 +1,4 @@
-package com.aptiv.watchdogapp
+package com.aptiv.watchdogapp.data
 
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET

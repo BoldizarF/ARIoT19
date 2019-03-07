@@ -1,6 +1,6 @@
-package com.aptiv.watchdogapp.health
+package com.aptiv.watchdogapp.data.health.remote
 
-import com.aptiv.watchdogapp.WatchDogApiService
+import com.aptiv.watchdogapp.data.WatchDogApiService
 
 class HealthRemoteDataStore
 
