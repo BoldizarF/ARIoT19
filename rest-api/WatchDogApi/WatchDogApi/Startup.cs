@@ -53,7 +53,7 @@ namespace WatchDogApi
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Values", action = "Get" });
+                    defaults: new { controller = "Images", action = "Get" });
             });
         }
     }
