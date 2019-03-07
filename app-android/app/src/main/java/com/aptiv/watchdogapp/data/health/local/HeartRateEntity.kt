@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "heartrate_items")
 class HeartRateEntity(
     val value: Int,
-    @PrimaryKey
     val timestamp: Long
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}
