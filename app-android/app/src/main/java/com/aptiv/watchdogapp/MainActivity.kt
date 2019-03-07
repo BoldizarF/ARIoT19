@@ -2,6 +2,7 @@ package com.aptiv.watchdogapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aptiv.watchdogapp.data.RepositoryFactory
@@ -31,14 +32,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         setupGraph()
         setupReycleView()
+        findViewById<Button>(R.id.refresh_btn).setOnClickListener {
+            refreshData()
+        }
 
         healthRepository = RepositoryFactory.createHealthRepository(applicationContext)
         imageRepository = RepositoryFactory.createImagesRepository(applicationContext)
 
-        retrieveHeartRateData()
-        retrieveImages()
+        refreshData()
     }
 
     private fun setupReycleView() {
@@ -51,6 +55,11 @@ class MainActivity : AppCompatActivity() {
     private fun setupGraph() {
         // http://www.android-graphview.org/simple-graph/
         graphView = findViewById(R.id.graph)
+    }
+
+    private fun refreshData() {
+        retrieveHeartRateData()
+        retrieveImages()
     }
 
     private fun retrieveHeartRateData() {

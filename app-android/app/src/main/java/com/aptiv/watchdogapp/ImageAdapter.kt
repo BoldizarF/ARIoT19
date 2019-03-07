@@ -31,6 +31,7 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.PhotoHolder>()  {
     override fun getItemCount() = photos.size
 
     fun addImages(newItems: List<CapturedImage>) {
+        photos.clear()
         photos.addAll(newItems)
         notifyDataSetChanged()
     }
