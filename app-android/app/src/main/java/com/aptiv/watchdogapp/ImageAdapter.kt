@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aptiv.watchdogapp.data.image.CapturedImage
-import com.bumptech.glide.Glide
-import android.util.Base64
 import android.widget.ImageView
+import com.aptiv.watchdogapp.util.DateHelper
+import com.aptiv.watchdogapp.util.loadFromBase64
+import java.util.*
 
 class ImageAdapter(private val clickListener: ((item: CapturedImage) -> Unit)) : RecyclerView.Adapter<ImageAdapter.PhotoHolder>()  {
 
@@ -43,28 +44,18 @@ class ImageAdapter(private val clickListener: ((item: CapturedImage) -> Unit)) :
         notifyDataSetChanged()
     }
 
-    class PhotoHolder(private val view: View, private val clickListener: ((item: CapturedImage) -> Unit)) : RecyclerView.ViewHolder(view) {
+    class PhotoHolder(view: View, private val clickListener: ((item: CapturedImage) -> Unit)) : RecyclerView.ViewHolder(view) {
         private val timestamp: TextView = view.findViewById(R.id.itemDate)
         private val image: ImageView = view.findViewById(R.id.itemImage)
 
         fun bindPhoto(photo: CapturedImage) {
             image.loadFromBase64(photo.value)
-            timestamp.text = formatTimestamp(photo.timestamp)
+            timestamp.text = DateHelper.formatTimestamp(photo.timestamp)
 
             image.setOnLongClickListener {
                 clickListener.invoke(photo)
                 true
             }
-        }
-
-        private fun formatTimestamp(timestamp: Long): String {
-            // convert seconds to milliseconds
-            val date = java.util.Date(timestamp * 1000L)
-            // the format of your date
-            val sdf = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm")
-            // give a timezone reference for formatting (see comment at the bottom)
-            sdf.timeZone = java.util.TimeZone.getTimeZone("GMT+1")
-            return sdf.format(date)
         }
     }
 }

@@ -17,9 +17,12 @@ import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import android.app.Dialog
+import android.app.PendingIntent.getActivity
 import android.view.Window
 import android.widget.ImageView
 import com.aptiv.watchdogapp.data.image.CapturedImage
+import com.aptiv.watchdogapp.util.loadFromBase64
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,11 +31,10 @@ class MainActivity : AppCompatActivity() {
     private val bgContext = Default
 
     private lateinit var graphView: GraphView
+    private lateinit var adapter : ImageAdapter
 
     private lateinit var healthRepository: HealthRepository
     private lateinit var imageRepository: ImageRepository
-    private lateinit var adapter : ImageAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +79,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupGraph() {
         // http://www.android-graphview.org/simple-graph/
         graphView = findViewById(R.id.graph)
+        graphView.gridLabelRenderer.labelFormatter = DateAsXAxisLabelFormatter(this)
     }
 
     private fun refreshData() {

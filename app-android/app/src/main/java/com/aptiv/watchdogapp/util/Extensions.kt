@@ -1,4 +1,4 @@
-package com.aptiv.watchdogapp
+package com.aptiv.watchdogapp.util
 
 import android.util.Base64
 import android.widget.ImageView
