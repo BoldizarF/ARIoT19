@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aptiv.watchdogapp.data.RepositoryFactory
 import com.aptiv.watchdogapp.data.health.HealthRepository
 import com.aptiv.watchdogapp.data.image.ImageRepository
-import com.aptiv.watchdogapp.recyclerview.RecyclerViewAdapter
+import com.aptiv.watchdogapp.recyclerview.RecyclerAdapter
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.jjoe64.graphview.GraphView
@@ -42,11 +42,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupReycleView() {
-        val data = arrayOf("a", "b", "c")
+/*        val data = arrayOf("a", "b", "c")
         val recyclerView = findViewById<RecyclerView>(R.id.recycle_view)
         recyclerView.layoutManager = GridLayoutManager(this, 4)
-        val adapter = RecyclerViewAdapter(this, data)
-        recyclerView.adapter = adapter
+        val adapter = RecyclerAdapter(this, data)
+        recyclerView.adapter = adapter*/
     }
 
     private fun setupGraph() {
