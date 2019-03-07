@@ -2,15 +2,21 @@ package com.aptiv.watchdogapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.aptiv.watchdogapp.health.HealthRepository
+import com.aptiv.watchdogapp.health.HealthRepositoryFactory
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.jjoe64.graphview.GraphView
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var healthRepository: HealthRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        healthRepository = HealthRepositoryFactory.create(this.applicationContext)
 
         addDummyData()
     }
