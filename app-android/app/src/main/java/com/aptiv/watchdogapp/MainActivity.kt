@@ -16,6 +16,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import android.app.Dialog
+import android.view.Window
+import android.widget.ImageView
+import com.aptiv.watchdogapp.data.image.CapturedImage
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,8 +51,27 @@ class MainActivity : AppCompatActivity() {
     private fun setupReycleView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recycle_view)
         recyclerView.layoutManager = GridLayoutManager(this, 3)
-        adapter = ImageAdapter()
+        adapter = ImageAdapter(::onImageClicked)
         recyclerView.adapter = adapter
+    }
+
+    private fun onImageClicked(item: CapturedImage) {
+        val dialog = Dialog(this)
+        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
+
+        val dialogView = layoutInflater.inflate(R.layout.dialog_image, null)
+        dialogView.findViewById<ImageView>(R.id.dialog_image).loadFromBase64(item.value)
+        dialogView.findViewById<Button>(R.id.close_btn).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogView.findViewById<Button>(R.id.delete_btn).setOnClickListener {
+            deleteImage(item.timestamp)
+            dialog.dismiss()
+        }
+
+        dialog.setContentView(dialogView)
+        dialog.show()
     }
 
     private fun setupGraph() {
@@ -58,6 +82,18 @@ class MainActivity : AppCompatActivity() {
     private fun refreshData() {
         retrieveHeartRateData()
         retrieveImages()
+    }
+
+    private fun deleteImage(timestamp: Long) {
+        uiScope.launch {
+            val result = withContext(bgContext) {
+                imageRepository.deleteImage(timestamp)
+            }
+
+            if (result) {
+                adapter.removeImage(timestamp)
+            }
+        }
     }
 
     private fun retrieveHeartRateData() {

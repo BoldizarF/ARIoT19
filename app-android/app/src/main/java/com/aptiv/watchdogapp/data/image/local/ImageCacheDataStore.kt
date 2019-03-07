@@ -8,15 +8,19 @@ class ImageCacheDataStore
         private val database: WatchDogDatabase
     ) {
 
-    fun getAllHeartRateValues(): List<ImageEntity> {
+    fun getAllCachedImages(): List<ImageEntity> {
         return database.imageDao().selectAll()
     }
 
-    fun addHeartRateValues(values: List<ImageEntity>) {
+    fun addImages(values: List<ImageEntity>) {
         database.runInTransaction {
             values.forEach {
                 database.imageDao().insert(it)
             }
         }
+    }
+
+    fun deleteImage(timestamp: Long): Boolean {
+        return database.imageDao().delete(timestamp) > 0
     }
 }

@@ -10,18 +10,18 @@ import com.bumptech.glide.Glide
 import android.util.Base64
 import android.widget.ImageView
 
-class ImageAdapter : RecyclerView.Adapter<ImageAdapter.PhotoHolder>()  {
+class ImageAdapter(private val clickListener: ((item: CapturedImage) -> Unit)) : RecyclerView.Adapter<ImageAdapter.PhotoHolder>()  {
 
     private var photos = ArrayList<CapturedImage>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoHolder {
-        return PhotoHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.row_image,
-                parent,
-                false
-            )
+        val itemView = LayoutInflater.from(parent.context).inflate(
+            R.layout.row_image,
+            parent,
+            false
         )
+
+        return PhotoHolder(itemView, clickListener)
     }
 
     override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
@@ -36,20 +36,35 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.PhotoHolder>()  {
         notifyDataSetChanged()
     }
 
-    class PhotoHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        private val temp: TextView = view.findViewById(R.id.itemDate)
+    fun removeImage(imageId: Long) {
+        photos.removeIf {
+            it.timestamp == imageId
+        }
+        notifyDataSetChanged()
+    }
+
+    class PhotoHolder(private val view: View, private val clickListener: ((item: CapturedImage) -> Unit)) : RecyclerView.ViewHolder(view) {
+        private val timestamp: TextView = view.findViewById(R.id.itemDate)
         private val image: ImageView = view.findViewById(R.id.itemImage)
 
         fun bindPhoto(photo: CapturedImage) {
-            val imageByteArray = Base64.decode(photo.value, Base64.DEFAULT)
+            image.loadFromBase64(photo.value)
+            timestamp.text = formatTimestamp(photo.timestamp)
 
-            Glide.with(view.context)
-                .asBitmap()
-                .load(imageByteArray)
-                .into(image)
+            image.setOnLongClickListener {
+                clickListener.invoke(photo)
+                true
+            }
+        }
 
-
-            temp.text = photo.timestamp.toString()
+        private fun formatTimestamp(timestamp: Long): String {
+            // convert seconds to milliseconds
+            val date = java.util.Date(timestamp * 1000L)
+            // the format of your date
+            val sdf = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm")
+            // give a timezone reference for formatting (see comment at the bottom)
+            sdf.timeZone = java.util.TimeZone.getTimeZone("GMT+1")
+            return sdf.format(date)
         }
     }
 }

@@ -11,14 +11,18 @@ class ImageRepository
         private val cacheDataStore: ImageCacheDataStore
     ) {
 
+    suspend fun deleteImage(timestamp: Long): Boolean {
+        return cacheDataStore.deleteImage(timestamp)
+    }
+
     suspend fun getValues(): List<CapturedImage> {
         val remoteValues = remoteDataStore.getRecentHeartRates().entries.map {
             ImageEntity(it.value, it.key)
         }
 
-        cacheDataStore.addHeartRateValues(remoteValues)
+        cacheDataStore.addImages(remoteValues)
 
-        return cacheDataStore.getAllHeartRateValues()
+        return cacheDataStore.getAllCachedImages()
             .map { CapturedImage(it.value, it.timestamp) }
             .sortedBy { it.timestamp }
     }
