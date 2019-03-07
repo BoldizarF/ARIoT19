@@ -13,7 +13,7 @@ class HealthRepository
 
     suspend fun getValues(): List<HeartRateValue> {
         val remoteValues = remoteDataStore.getRecentHeartRates().entries.map {
-            HeartRateEntity(it.value, it.key)
+            HeartRateEntity(it.key, it.value)
         }
 
         cacheDataStore.addHeartRateValues(remoteValues)
