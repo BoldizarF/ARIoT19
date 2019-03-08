@@ -1,6 +1,6 @@
 {
-  "name": "camtoweb",
-  "version": "0.0.0",
+  "name": "nodejs",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-webcam": "^0.4.6
+    "node-webcam": "^0.4.6",
+    "onoff": "^4.1.0"
   }
 }
-
