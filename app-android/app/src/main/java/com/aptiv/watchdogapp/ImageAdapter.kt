@@ -54,7 +54,7 @@ class ImageAdapter(private val clickListener: ((item: CapturedImage) -> Unit)) :
 
         fun bindPhoto(photo: CapturedImage) {
             image.loadFromBase64(photo.value)
-            timestamp.text = DateHelper.formatTimestamp(photo.timestamp)
+            timestamp.text = DateHelper.formatTimestamp(photo.timestamp, false)
 
             image.setOnLongClickListener {
                 clickListener.invoke(photo)

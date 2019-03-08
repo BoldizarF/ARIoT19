@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         graphView.gridLabelRenderer.labelFormatter = object : DefaultLabelFormatter() {
             override fun formatLabel(value: Double, isValueX: Boolean): String {
                 return if (isValueX) {
-                    DateHelper.formatTimestamp(value.toLong(), true)
+                    DateHelper.formatTimestamp(value.toLong())
                 } else {
                     value.toLong().toString()
                 }

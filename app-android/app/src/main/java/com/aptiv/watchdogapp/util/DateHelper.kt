@@ -5,12 +5,12 @@ import java.util.*
 
 object DateHelper {
 
-    fun formatTimestamp(timestamp: Long, includeOnlyDay: Boolean = false): String {
+    fun formatTimestamp(timestamp: Long, simpleFormat: Boolean = true): String {
         // the format of your date
-        val sdf = if (includeOnlyDay) {
+        val sdf = if (simpleFormat) {
             SimpleDateFormat("EEE HH:mm:ss")
         } else {
-            SimpleDateFormat("yyyy-MM-dd HH:mm")
+            SimpleDateFormat("EEE MM/dd HH:mm:ss")
         }
         // give a timezone reference for formatting
         sdf.timeZone = java.util.TimeZone.getTimeZone("GMT+1")
