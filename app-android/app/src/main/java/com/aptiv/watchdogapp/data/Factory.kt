@@ -1,6 +1,7 @@
 package com.aptiv.watchdogapp.data
 
 import android.content.Context
+import com.aptiv.watchdogapp.MedicalAssistManager
 import com.aptiv.watchdogapp.data.attack.AttackManager
 import com.aptiv.watchdogapp.data.health.local.HealthCacheDataStore
 import com.aptiv.watchdogapp.data.health.remote.HealthRemoteDataStore
@@ -9,7 +10,11 @@ import com.aptiv.watchdogapp.data.image.local.ImageCacheDataStore
 import com.aptiv.watchdogapp.data.image.remote.ImageRemoteDataStore
 import com.aptiv.watchdogapp.data.image.ImageRepository
 
-object RepositoryFactory {
+object Factory {
+
+    fun createMedicalManager(context: Context): MedicalAssistManager {
+        return MedicalAssistManager(context)
+    }
 
     fun createHealthRepository(context: Context): HealthRepository {
         val api = RetrofitFactory.getInstance()

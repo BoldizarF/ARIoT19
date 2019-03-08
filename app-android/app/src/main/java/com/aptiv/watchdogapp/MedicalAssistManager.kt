@@ -9,10 +9,9 @@ class MedicalAssistManager(context: Context) {
     private var alertDialog = AlertDialog.Builder(context)
         .setTitle("Health warning!")
         .setIcon(android.R.drawable.ic_dialog_alert)
-        .setPositiveButton(android.R.string.yes) { dialog, which ->
+        .setPositiveButton(android.R.string.ok) { dialog, which ->
         }
-        .setNegativeButton(android.R.string.no) { dialog, which ->
-        }
+     //   .setNegativeButton(android.R.string.no) { dialog, which -> }
         .create()
 
     companion object {

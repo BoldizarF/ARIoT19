@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aptiv.watchdogapp.data.RepositoryFactory
+import com.aptiv.watchdogapp.data.Factory
 import com.aptiv.watchdogapp.data.health.HealthRepository
 import com.aptiv.watchdogapp.data.image.ImageRepository
 import com.jjoe64.graphview.series.DataPoint
@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var healthRepository: HealthRepository
     private lateinit var imageRepository: ImageRepository
 
+    companion object {
+        private val HOUR_IN_SECONDS = TimeUnit.HOURS.toSeconds(1)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -56,10 +60,10 @@ class MainActivity : AppCompatActivity() {
         setupReycleView()
         bindControlButtons()
 
-        medicalManager = MedicalAssistManager(this)
-        attackManager = RepositoryFactory.createAttackManager()
-        healthRepository = RepositoryFactory.createHealthRepository(applicationContext)
-        imageRepository = RepositoryFactory.createImagesRepository(applicationContext)
+        medicalManager = Factory.createMedicalManager(this)
+        attackManager = Factory.createAttackManager()
+        healthRepository = Factory.createHealthRepository(applicationContext)
+        imageRepository = Factory.createImagesRepository(applicationContext)
     }
 
     override fun onStart() {
@@ -78,8 +82,17 @@ class MainActivity : AppCompatActivity() {
         onImageClicked(item, false)
     }
 
-    private fun onImageClicked(item: CapturedImage, isNewImage: Boolean) {
-        val dialog = Dialog(this)
+    private fun onImageClicked(item: CapturedImage, isNewImage: Boolean) = uiScope.launch {
+        val result = withContext(bgContext) {
+            healthRepository.getValues()
+        }
+
+        val filteredValues = result.filter {
+            it.timestamp < item.timestamp - HOUR_IN_SECONDS ||
+            it.timestamp > item.timestamp + HOUR_IN_SECONDS
+        }
+
+        val dialog = Dialog(this@MainActivity)
         dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         val dialogView = layoutInflater.inflate(R.layout.dialog_image, null)
@@ -202,7 +215,7 @@ class MainActivity : AppCompatActivity() {
 
             val temperatureSeries = LineGraphSeries(temperatureDataPoints).apply {
                 title = "Body Temperature"
-                color = Color.GREEN
+                color = Color.RED
                 isDrawDataPoints = true
                 dataPointsRadius = 10f
                 thickness = 8
