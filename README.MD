@@ -12,7 +12,7 @@ The project uses a large number of different microcontrollers and other platform
 #### Software
 ```
 Arduino IDE
-Android studio with Android Oreo
+Android studio, minimum SDK is set to Oreo
 SSH
 ```
 
@@ -62,57 +62,48 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo
 
-## Running the tests
+## Project practices
 
-Explain how to run the automated tests for this system
+### Test Cases
+We understand that writing tests are boring so we as a project have adapted the YOLO mindset.
+Skip the test cases and just be happy....
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+### Code style
+Same here, you are unique as an individual. All code is beautiful!
 
 ## Deployment
+Information about how to get the system up n running
 
-Add additional notes about how to deploy this on a live system
+### Cloud
+```
+1. Build the WatchDogApi
+2. Create a zip archive of: 
+    - WatchDogApi folder 
+    - Dockerfile
+    - WatchDogApi.sln
+3. Upload the zip to your Elastic Beanstalk on AWS 
+```
 
-## Built With
+### Android Dashboard
+```
+1. Open the app-android project in Android Studio
+2. Connect your tablet
+3. Press 'Run'
+```
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+### Arduino
+TODO: add something about arduino here
 
 ## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+If you want to contribute, send us a PR and we most likely won't have a look at it.
 
 ## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+We use [SemVer](http://semver.org/) for versioning.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+Thanks to the guys who arrangened the ARIoT 2019 event in Oslo, without them this project would never happend.
 
