@@ -11,6 +11,10 @@ class HealthRepository
         private val cacheDataStore: HealthCacheDataStore
     ) {
 
+    fun clearAll(): Boolean {
+        return cacheDataStore.clearAll()
+    }
+
     suspend fun getValues(): List<HeartRateValue> {
         val remoteValues = remoteDataStore.getRecentHeartRates().entries.map {
             HeartRateEntity(it.key, it.value)

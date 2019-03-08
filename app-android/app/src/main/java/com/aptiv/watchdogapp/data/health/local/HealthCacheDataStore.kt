@@ -9,6 +9,10 @@ class HealthCacheDataStore
         private val database: WatchDogDatabase
     ) {
 
+    fun clearAll(): Boolean {
+        return database.healthDao().deleteAll() > 0
+    }
+
     fun getAllHeartRateValues(): List<HeartRateEntity> {
         return database.healthDao().selectAll()
     }

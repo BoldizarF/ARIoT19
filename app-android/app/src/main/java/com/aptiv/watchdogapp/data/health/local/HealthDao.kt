@@ -14,4 +14,7 @@ interface HealthDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(entity: HeartRateEntity)
 
+    @Query("DELETE FROM heartrate_items")
+    fun deleteAll(): Int
+
 }

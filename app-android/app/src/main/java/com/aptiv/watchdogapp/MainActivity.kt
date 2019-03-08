@@ -19,11 +19,12 @@ import kotlinx.coroutines.withContext
 import android.app.Dialog
 import android.view.Window
 import android.widget.ImageView
+import android.widget.Toast
 import com.aptiv.watchdogapp.data.image.CapturedImage
 import com.aptiv.watchdogapp.util.DateHelper
 import com.aptiv.watchdogapp.util.loadFromBase64
 import com.jjoe64.graphview.DefaultLabelFormatter
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter
+import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -86,14 +87,27 @@ class MainActivity : AppCompatActivity() {
     private fun setupGraph() {
         // http://www.android-graphview.org/simple-graph/
         graphView = findViewById(R.id.graph)
-      //  graphView.gridLabelRenderer.labelFormatter = DateAsXAxisLabelFormatter(this)
+
+        graphView.viewport.isScalable = true
+        graphView.viewport.setMinY(20.0)
+        graphView.viewport.setMaxY(220.0)
+        graphView.viewport.isYAxisBoundsManual = true
+
+        val calendar = GregorianCalendar(2019, 2, 8, 8, 0)
+        val startTime = calendar.time
+        calendar.add(Calendar.HOUR_OF_DAY, 6)
+        val endTime = calendar.time
+
+        graphView.viewport.setMinX(startTime.time.toDouble())
+        graphView.viewport.setMaxX(endTime.time.toDouble())
+        graphView.viewport.isXAxisBoundsManual = true
 
         graphView.gridLabelRenderer.labelFormatter = object : DefaultLabelFormatter() {
             override fun formatLabel(value: Double, isValueX: Boolean): String {
                 return if (isValueX) {
                     DateHelper.formatTimestamp(value.toLong(), true)
                 } else {
-                    value.toInt().toString()
+                    value.toLong().toString()
                 }
             }
         }
@@ -124,11 +138,21 @@ class MainActivity : AppCompatActivity() {
 
             if (result.isEmpty()) return@launch
 
-            val dataPoints = result.mapIndexed { index, heartRateValue ->
-                DataPoint(heartRateValue.timestamp.toDouble(), heartRateValue.value.toDouble())
+            graphView.removeAllSeries()
+
+            val dataPoints = result.map {
+                DataPoint(DateHelper.parseTimestamp(it.timestamp), it.value.toDouble())
             }.toTypedArray()
 
-            graphView.addSeries(LineGraphSeries(dataPoints))
+            val series = LineGraphSeries(dataPoints)
+
+            series.isDrawBackground = true
+            series.isDrawDataPoints = true
+            series.dataPointsRadius = 10f
+            series.thickness = 8
+            //series.setAnimated(true)
+
+            graphView.addSeries(series)
         }
     }
 
@@ -144,7 +168,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun deleteAllHeartRateValues() {
+        uiScope.launch {
+            val result = withContext(bgContext) {
+                healthRepository.clearAll()
+            }
+
+            val msg = if (result) "Successfully cleared heart rates" else "Unable to clear heart rates"
+            Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun bindControlButtons() {
+        findViewById<Button>(R.id.clear_btn).setOnClickListener {
+            deleteAllHeartRateValues()
+        }
         findViewById<Button>(R.id.refresh_btn).setOnClickListener {
             refreshData()
         }
