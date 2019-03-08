@@ -105,5 +105,5 @@ We use [SemVer](http://semver.org/) for versioning.
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-Thanks to the guys who arrangened the ARIoT 2019 event in Oslo, without them this project would never happend.
-
+Thanks to the guys who arranged the ARIoT 2019 event in Oslo, without them this project would never happened.
+A special thanks also to Dimitrios Platis, who coached the team and assisted remotely even during the event.
