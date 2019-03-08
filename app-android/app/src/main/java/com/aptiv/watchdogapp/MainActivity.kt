@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             toggleVisibility(isNewImage)
             setOnClickListener {
                 launchAttack()
+                dialog.dismiss()
             }
         }
 
