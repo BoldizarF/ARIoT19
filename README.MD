@@ -30,7 +30,7 @@ Rotor encoder (used as odometer)
 USB camera
 OLED display
 Voltage upconverter 3.3 to 5V
-Pulse sensor
+Heartbeat pulse sensor
 Temperature sensor
 ```
 
@@ -43,10 +43,20 @@ Arduino IDE: https://www.arduino.cc/en/Main/Software
 SSH is included with most operating systems
 ```
 
-The different hardwares are connected like this:
+#### The different hardwares
+The car consists of the following hardwares:
+```
+Raspberry pi 3B
+Arduino uno
+Motorcontroller shield
+Robot-03 Car kit for Arduino
+IR-sensor
+4x Ultrasonic sensors
+2x 4-slot AA battery holder
+Rotor encoder (used as odometer)
+USB camera
 ```
 
-```
 
 Say what the step will be
 
