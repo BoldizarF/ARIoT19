@@ -93,10 +93,14 @@ class MainActivity : AppCompatActivity() {
         graphView.viewport.setMaxY(220.0)
         graphView.viewport.isYAxisBoundsManual = true
 
-        val calendar = GregorianCalendar(2019, 2, 8, 8, 0)
-        val startTime = calendar.time
-        calendar.add(Calendar.HOUR_OF_DAY, 6)
+        val calendar = GregorianCalendar()
+        calendar.time = Date()
+
+        calendar.add(Calendar.HOUR_OF_DAY, 1)
         val endTime = calendar.time
+
+        calendar.add(Calendar.HOUR_OF_DAY, -8)
+        val startTime = calendar.time
 
         graphView.viewport.setMinX(startTime.time.toDouble())
         graphView.viewport.setMaxX(endTime.time.toDouble())
@@ -141,7 +145,7 @@ class MainActivity : AppCompatActivity() {
             graphView.removeAllSeries()
 
             val dataPoints = result.map {
-                DataPoint(DateHelper.parseTimestamp(it.timestamp), it.value.toDouble())
+                DataPoint(it.timestamp.toDouble(), it.value.toDouble())
             }.toTypedArray()
 
             val series = LineGraphSeries(dataPoints)

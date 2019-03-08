@@ -8,7 +8,7 @@ object DateHelper {
     fun formatTimestamp(timestamp: Long, includeOnlyDay: Boolean = false): String {
         // the format of your date
         val sdf = if (includeOnlyDay) {
-            SimpleDateFormat("EEE HH:mm")
+            SimpleDateFormat("EEE HH:mm:ss")
         } else {
             SimpleDateFormat("yyyy-MM-dd HH:mm")
         }
