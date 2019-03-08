@@ -1,13 +1,18 @@
 package com.aptiv.watchdogapp.util
 
+import java.text.SimpleDateFormat
 import java.util.*
 
 object DateHelper {
 
-    fun formatTimestamp(timestamp: Long): String {
+    fun formatTimestamp(timestamp: Long, includeOnlyDay: Boolean = false): String {
         // the format of your date
-        val sdf = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm")
-        // give a timezone reference for formatting (see comment at the bottom)
+        val sdf = if (includeOnlyDay) {
+            SimpleDateFormat("EEE HH:mm")
+        } else {
+            SimpleDateFormat("yyyy-MM-dd HH:mm")
+        }
+        // give a timezone reference for formatting
         sdf.timeZone = java.util.TimeZone.getTimeZone("GMT+1")
         return sdf.format(parseTimestamp(timestamp))
     }

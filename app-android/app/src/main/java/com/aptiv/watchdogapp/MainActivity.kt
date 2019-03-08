@@ -20,7 +20,9 @@ import android.app.Dialog
 import android.view.Window
 import android.widget.ImageView
 import com.aptiv.watchdogapp.data.image.CapturedImage
+import com.aptiv.watchdogapp.util.DateHelper
 import com.aptiv.watchdogapp.util.loadFromBase64
+import com.jjoe64.graphview.DefaultLabelFormatter
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -84,7 +86,17 @@ class MainActivity : AppCompatActivity() {
     private fun setupGraph() {
         // http://www.android-graphview.org/simple-graph/
         graphView = findViewById(R.id.graph)
-        graphView.gridLabelRenderer.labelFormatter = DateAsXAxisLabelFormatter(this)
+      //  graphView.gridLabelRenderer.labelFormatter = DateAsXAxisLabelFormatter(this)
+
+        graphView.gridLabelRenderer.labelFormatter = object : DefaultLabelFormatter() {
+            override fun formatLabel(value: Double, isValueX: Boolean): String {
+                return if (isValueX) {
+                    DateHelper.formatTimestamp(value.toLong(), true)
+                } else {
+                    value.toInt().toString()
+                }
+            }
+        }
     }
 
     private fun refreshData() {
@@ -113,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             if (result.isEmpty()) return@launch
 
             val dataPoints = result.mapIndexed { index, heartRateValue ->
-                DataPoint(index.toDouble(), heartRateValue.value.toDouble())
+                DataPoint(heartRateValue.timestamp.toDouble(), heartRateValue.value.toDouble())
             }.toTypedArray()
 
             graphView.addSeries(LineGraphSeries(dataPoints))
