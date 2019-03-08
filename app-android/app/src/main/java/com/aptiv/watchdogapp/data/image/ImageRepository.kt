@@ -11,7 +11,7 @@ class ImageRepository
         private val cacheDataStore: ImageCacheDataStore
     ) {
 
-    suspend fun deleteImage(timestamp: Long): Boolean {
+    fun deleteImage(timestamp: Long): Boolean {
         return cacheDataStore.deleteImage(timestamp)
     }
 
@@ -24,6 +24,6 @@ class ImageRepository
 
         return cacheDataStore.getAllCachedImages()
             .map { CapturedImage(it.value, it.timestamp) }
-            .sortedBy { it.timestamp }
+            .sortedByDescending { it.timestamp }
     }
 }
