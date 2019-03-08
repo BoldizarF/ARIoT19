@@ -101,7 +101,11 @@ Information about how to get the system up n running
 ```
 
 ### Arduino
-TODO: add something about arduino here
+```
+1. Connect to Arduino through USB
+2. Load the arduino code into arduino studio
+3. Click upload
+```
 
 ## Contributing
 If you want to contribute, send us a PR and we most likely won't have a look at it.
