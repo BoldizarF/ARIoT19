@@ -4,18 +4,28 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitFactory {
+class RetrofitFactory {
 
-    fun create(): WatchDogApiService {
-        val retrofit = createRetrofit()
-        return retrofit.create(WatchDogApiService::class.java)
-    }
+    companion object {
+        @Volatile
+        private var INSTANCE: WatchDogApiService? = null
 
-    private fun createRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(WatchDogApiService.ENDPOINT)
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        fun getInstance(): WatchDogApiService {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
+            synchronized(this) {
+                val instance = Retrofit.Builder()
+                    .baseUrl(WatchDogApiService.ENDPOINT)
+                    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                    .create(WatchDogApiService::class.java)
+
+                INSTANCE = instance
+                return instance
+            }
+        }
     }
 }

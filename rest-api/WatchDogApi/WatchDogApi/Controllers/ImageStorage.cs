@@ -6,7 +6,7 @@ namespace WatchDogApi.Controllers
 {
     public sealed class ImageStorage
     {
-        private static readonly object mutex = new object();
+        private static readonly object Mutex = new object();
         
         private static readonly Dictionary<long, string> Images = new Dictionary<long, string>();
         
@@ -20,7 +20,7 @@ namespace WatchDogApi.Controllers
 
         public static void AddImage(string encodedImage)
         {
-            lock (mutex)
+            lock (Mutex)
             {
                 var timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
                 Images.Add(timestamp, encodedImage);
@@ -29,7 +29,7 @@ namespace WatchDogApi.Controllers
 
         public static Dictionary<long, string> GetImages()
         {
-            lock (mutex)
+            lock (Mutex)
             {
                 var imagesToReturn = new Dictionary<long, string>(Images);
                 Images.Clear();
@@ -39,7 +39,7 @@ namespace WatchDogApi.Controllers
         
         public static void ClearStorage()
         {
-            lock (mutex)
+            lock (Mutex)
             {
                 Images.Clear();
             }

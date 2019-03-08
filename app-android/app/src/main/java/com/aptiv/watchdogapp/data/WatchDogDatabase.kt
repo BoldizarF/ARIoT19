@@ -5,13 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.aptiv.watchdogapp.data.health.local.HealthDao
-import com.aptiv.watchdogapp.data.health.local.HeartRateEntity
+import com.aptiv.watchdogapp.data.health.local.HealthValueEntity
 import com.aptiv.watchdogapp.data.image.local.ImageDao
 import com.aptiv.watchdogapp.data.image.local.ImageEntity
 
 @Database(entities = [
     ImageEntity::class,
-    HeartRateEntity::class
+    HealthValueEntity::class
 ], version = 1)
 abstract class WatchDogDatabase : RoomDatabase() {
 

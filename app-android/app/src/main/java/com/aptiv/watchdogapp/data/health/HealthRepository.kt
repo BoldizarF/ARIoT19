@@ -1,7 +1,7 @@
 package com.aptiv.watchdogapp.data.health
 
 import com.aptiv.watchdogapp.data.health.local.HealthCacheDataStore
-import com.aptiv.watchdogapp.data.health.local.HeartRateEntity
+import com.aptiv.watchdogapp.data.health.local.HealthValueEntity
 import com.aptiv.watchdogapp.data.health.remote.HealthRemoteDataStore
 
 class HealthRepository
@@ -15,15 +15,16 @@ class HealthRepository
         return cacheDataStore.clearAll()
     }
 
-    suspend fun getValues(): List<HeartRateValue> {
-        val remoteValues = remoteDataStore.getRecentHeartRates().entries.map {
-            HeartRateEntity(it.key, it.value)
+    suspend fun getValues(): List<HealthValue> {
+        val remoteValues = remoteDataStore.getRecentHealthValues().map { response ->
+            val healthValues = response.value.split(":")
+            HealthValueEntity(response.key, healthValues[0].toInt(), healthValues[1].toDouble())
         }
 
-        cacheDataStore.addHeartRateValues(remoteValues)
+        cacheDataStore.addHealthValues(remoteValues)
 
         return cacheDataStore.getAllHeartRateValues()
-            .map { HeartRateValue(it.value, it.timestamp) }
+            .map { HealthValue(it.heartRate, it.temperature, it.timestamp) }
             .sortedBy { it.timestamp }
     }
 }

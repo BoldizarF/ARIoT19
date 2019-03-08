@@ -1,7 +1,9 @@
 package com.aptiv.watchdogapp.data
 
 import kotlinx.coroutines.Deferred
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface WatchDogApiService {
 
@@ -10,9 +12,11 @@ interface WatchDogApiService {
     }
 
     @GET("healthvalues?apikey=555")
-    fun getLatestHeartRateValues(): Deferred<Map<Long, Int>>
+    fun getLatestHealthValues(): Deferred<Map<Long, String>>
 
     @GET("images?apikey=555")
-    fun getLatestImages():  Deferred<Map<Long, String>>
+    fun getLatestImages(): Deferred<Map<Long, String>>
 
+    @POST("attack?apikey=000")
+    fun setAttackMode(@Body setAttack: Boolean = true): Deferred<Boolean>
 }

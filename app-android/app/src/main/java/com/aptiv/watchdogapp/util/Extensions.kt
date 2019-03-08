@@ -12,4 +12,3 @@ fun ImageView.loadFromBase64(base64: String) {
         .load(imageByteArray)
         .into(this)
 }
-

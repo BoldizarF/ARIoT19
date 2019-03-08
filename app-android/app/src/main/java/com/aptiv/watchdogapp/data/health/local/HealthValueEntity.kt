@@ -3,9 +3,10 @@ package com.aptiv.watchdogapp.data.health.local
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "heartrate_items")
-class HeartRateEntity(
+@Entity(tableName = "health_value_items")
+class HealthValueEntity(
     @PrimaryKey
     val timestamp: Long,
-    val value: Int
+    val heartRate: Int,
+    val temperature: Double
 )

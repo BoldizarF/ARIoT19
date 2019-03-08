@@ -17,9 +17,11 @@ import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import android.app.Dialog
+import android.graphics.Color
 import android.view.Window
 import android.widget.ImageView
 import android.widget.Toast
+import com.aptiv.watchdogapp.data.attack.AttackManager
 import com.aptiv.watchdogapp.data.image.CapturedImage
 import com.aptiv.watchdogapp.util.DateHelper
 import com.aptiv.watchdogapp.util.loadFromBase64
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var graphView: GraphView
     private lateinit var adapter : ImageAdapter
 
+    private lateinit var attackManager: AttackManager
     private lateinit var healthRepository: HealthRepository
     private lateinit var imageRepository: ImageRepository
 
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         setupReycleView()
         bindControlButtons()
 
+        attackManager = RepositoryFactory.createAttackManager()
         healthRepository = RepositoryFactory.createHealthRepository(applicationContext)
         imageRepository = RepositoryFactory.createImagesRepository(applicationContext)
     }
@@ -151,19 +155,32 @@ class MainActivity : AppCompatActivity() {
 
             graphView.removeAllSeries()
 
-            val dataPoints = result.map {
-                DataPoint(it.timestamp.toDouble(), it.value.toDouble())
+            val heartRateDataPoints = result.map {
+                DataPoint(it.timestamp.toDouble(), it.heartRate.toDouble())
             }.toTypedArray()
 
-            val series = LineGraphSeries(dataPoints)
+            val heartRateSeries = LineGraphSeries(heartRateDataPoints).apply {
+                isDrawBackground = true
+                isDrawDataPoints = true
+                dataPointsRadius = 10f
+                thickness = 8
+                setAnimated(true)
+            }
 
-            series.isDrawBackground = true
-            series.isDrawDataPoints = true
-            series.dataPointsRadius = 10f
-            series.thickness = 8
-            series.setAnimated(true)
+            val temperatureDataPoints = result.map {
+                DataPoint(it.timestamp.toDouble(), it.temperature)
+            }.toTypedArray()
 
-            graphView.addSeries(series)
+            val temperatureSeries = LineGraphSeries(temperatureDataPoints).apply {
+                color = Color.GREEN
+                isDrawDataPoints = true
+                dataPointsRadius = 10f
+                thickness = 8
+                setAnimated(true)
+            }
+
+            graphView.addSeries(heartRateSeries)
+            graphView.addSeries(temperatureSeries)
         }
     }
 
@@ -190,7 +207,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun launchAttack() {
+        uiScope.launch {
+            val result = withContext(bgContext) {
+                attackManager.attack()
+            }
+
+            if (!result) {
+                Toast.makeText(this@MainActivity, "Unable to send attack request", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun bindControlButtons() {
+        findViewById<Button>(R.id.attack_btn).setOnClickListener {
+            launchAttack()
+        }
         findViewById<Button>(R.id.clear_btn).setOnClickListener {
             deleteAllHeartRateValues()
         }

@@ -5,9 +5,9 @@ namespace WatchDogApi.Controllers
 {
     public sealed class HeartRateStorage
     {
-        private static readonly object mutex = new object();
+        private static readonly object Mutex = new object();
         
-        private static readonly Dictionary<long, string> _heartRateValues = new Dictionary<long, string>();
+        private static readonly Dictionary<long, string> HeartRateValues = new Dictionary<long, string>();
         
         private static readonly Lazy<HeartRateStorage> Lazy = new Lazy<HeartRateStorage>(() => new HeartRateStorage());
 
@@ -19,26 +19,28 @@ namespace WatchDogApi.Controllers
 
         public static void AddNewValue(string value)
         {
-            lock (mutex)
+            lock (Mutex)
             {
                 var timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-                _heartRateValues.Add(timestamp, value);
+                HeartRateValues.Add(timestamp, value);
             }
         }
 
         public static Dictionary<long, string> GetHeartRateValues()
         {
-            lock (mutex)
+            lock (Mutex)
             {
-                return _heartRateValues;
+                var valuesToReturn = new Dictionary<long, string>(HeartRateValues);
+                HeartRateValues.Clear();
+                return valuesToReturn;
             }
         }
         
         public static void ClearStorage()
         {
-            lock (mutex)
+            lock (Mutex)
             {
-                _heartRateValues.Clear();
+                HeartRateValues.Clear();
             }
         }
     }
