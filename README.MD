@@ -1,7 +1,7 @@
 # ARIoT19 - Cerberus the guard dog
 The complete contribution from APTIV Code Constructors Artic IoT Challenge 2019
 
-![alt text](https://cdn3.iconfinder.com/data/icons/animals-105/150/icon_animal_lobo-512.png)
+![alt text](logo.png)
 
 ## Getting Started
 
