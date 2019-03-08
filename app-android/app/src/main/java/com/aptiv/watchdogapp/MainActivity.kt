@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter : ImageAdapter
 
     private lateinit var attackManager: AttackManager
+    private lateinit var medicalManager: MedicalAssistManager
+
     private lateinit var healthRepository: HealthRepository
     private lateinit var imageRepository: ImageRepository
 
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         setupReycleView()
         bindControlButtons()
 
+        medicalManager = MedicalAssistManager(this)
         attackManager = RepositoryFactory.createAttackManager()
         healthRepository = RepositoryFactory.createHealthRepository(applicationContext)
         imageRepository = RepositoryFactory.createImagesRepository(applicationContext)
@@ -175,6 +178,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            medicalManager.checkValues(result)
+
             graphView.removeAllSeries()
 
             val heartRateDataPoints = result.map {
@@ -227,7 +232,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun deleteAllHeartRateValues() {
+    private fun deleteAllHealthValues() {
         uiScope.launch {
             val result = withContext(bgContext) {
                 healthRepository.clearAll()
@@ -260,7 +265,7 @@ class MainActivity : AppCompatActivity() {
             launchAttack()
         }
         findViewById<Button>(R.id.clear_btn).setOnClickListener {
-            deleteAllHeartRateValues()
+            deleteAllHealthValues()
         }
         findViewById<Button>(R.id.refresh_btn).setOnClickListener {
             refreshData()

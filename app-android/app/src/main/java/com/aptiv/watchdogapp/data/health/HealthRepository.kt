@@ -27,7 +27,7 @@ class HealthRepository
 
         cacheDataStore.addHealthValues(remoteValues)
 
-        return cacheDataStore.getAllHeartRateValues()
+        return cacheDataStore.getAllHealthValues()
             .map { HealthValue(it.heartRate, it.temperature, it.timestamp) }
             .sortedBy { it.timestamp }
     }

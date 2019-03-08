@@ -12,7 +12,7 @@ class HealthCacheDataStore
         return database.healthDao().deleteAll() > 0
     }
 
-    fun getAllHeartRateValues(): List<HealthValueEntity> {
+    fun getAllHealthValues(): List<HealthValueEntity> {
         return database.healthDao().selectAll()
     }
 
