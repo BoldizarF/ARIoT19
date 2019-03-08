@@ -17,13 +17,13 @@ import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import android.app.Dialog
-import android.app.PendingIntent.getActivity
 import android.view.Window
 import android.widget.ImageView
 import com.aptiv.watchdogapp.data.image.CapturedImage
 import com.aptiv.watchdogapp.util.loadFromBase64
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter
-
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,8 +48,11 @@ class MainActivity : AppCompatActivity() {
 
         healthRepository = RepositoryFactory.createHealthRepository(applicationContext)
         imageRepository = RepositoryFactory.createImagesRepository(applicationContext)
+    }
 
-        refreshData()
+    override fun onStart() {
+        super.onStart()
+        schedulePolling()
     }
 
     private fun setupReycleView() {
@@ -136,5 +139,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.signout_btn).setOnClickListener {
             finish()
         }
+    }
+
+    private fun schedulePolling() {
+        val scheduler = Executors.newSingleThreadScheduledExecutor()
+        scheduler.scheduleAtFixedRate({
+            refreshData()
+        }, 0, 10, TimeUnit.SECONDS)
     }
 }
