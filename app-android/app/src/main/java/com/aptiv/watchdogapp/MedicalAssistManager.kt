@@ -20,7 +20,7 @@ class MedicalAssistManager(context: Context) {
 
     fun checkValues(values: List<HealthValue>) {
         val latestValues = values
-            .sortedBy {
+            .sortedByDescending {
                 it.timestamp
             }
             .take(5)
