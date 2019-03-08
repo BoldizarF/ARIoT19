@@ -82,16 +82,17 @@ class MainActivity : AppCompatActivity() {
         onImageClicked(item, false)
     }
 
-    private fun onImageClicked(item: CapturedImage, isNewImage: Boolean) = uiScope.launch {
-        val result = withContext(bgContext) {
-            healthRepository.getValues()
-        }
+    private fun onImageClicked(item: CapturedImage, isNewImage: Boolean) {
+        /*
+                val result = withContext(bgContext) {
+                    healthRepository.getValues()
+                }
 
-        val filteredValues = result.filter {
-            it.timestamp < item.timestamp - HOUR_IN_SECONDS ||
-            it.timestamp > item.timestamp + HOUR_IN_SECONDS
-        }
-
+                val filteredValues = result.filter {
+                    it.timestamp < item.timestamp - HOUR_IN_SECONDS ||
+                    it.timestamp > item.timestamp + HOUR_IN_SECONDS
+                }
+        */
         val dialog = Dialog(this@MainActivity)
         dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
 

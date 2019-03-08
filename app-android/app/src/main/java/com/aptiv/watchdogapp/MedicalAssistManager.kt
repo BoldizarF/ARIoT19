@@ -20,11 +20,11 @@ class MedicalAssistManager {
             .take(5)
 
         val hasBadHeartRate = latestValues
-            .filter { it.heartRate < 60 || it.heartRate > 170 }
+            .filter { it.heartRate <= 50 || it.heartRate >= 170 }
             .any()
 
         val hasBadTemperature = latestValues
-            .filter { it.temperature <= 35 || it.temperature >= 38  }
+            .filter { it.temperature <= 30 || it.temperature >= 40  }
             .any()
 
         var message = ""
