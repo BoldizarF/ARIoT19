@@ -29,8 +29,7 @@ IR-sensor
 Rotor encoder (used as odometer)
 USB camera
 OLED display
-Voltage upconverter 3.3 to 5V
-Pulse sensor
+Heartbeat pulse sensor
 Temperature sensor
 ```
 
@@ -43,24 +42,34 @@ Arduino IDE: https://www.arduino.cc/en/Main/Software
 SSH is included with most operating systems
 ```
 
-The different hardwares are connected like this:
+#### The different hardwares
+The car consists of the following components:
 ```
-
+Raspberry pi 3B
+Arduino uno
+Motorcontroller shield
+Robot-03 Car kit for Arduino
+IR-sensor
+4x Ultrasonic sensors
+2x 4-slot AA battery holder
+Rotor encoder (used as odometer)
+USB camera
 ```
+And here is how you connect those parts:
+![alt text](https://github.com/BoldizarF/ariot19/blob/master/Cerberus%20car%20sketch.png)
 
-Say what the step will be
-
+The wearable heartbeat monitor consists of these components:
 ```
-Give the example
+Wemos D32
+OLED display
+Heartbeat pulse sensor
+Temperature sensor
 ```
+In addition to those components there is a casing available for 3D printing. The CAD files are available in the "cadfiler" folder in the root of the project.
 
-And repeat
+Print the casing. Fit the components into it. They should all be connected to the wemos.
 
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+If everything is correctly installed, you should be able to see some images, temperature and heartbeat data in the application. Good luck!
 
 ## Project practices
 
