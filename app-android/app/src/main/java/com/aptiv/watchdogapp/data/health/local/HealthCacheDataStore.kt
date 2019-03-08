@@ -19,8 +19,14 @@ class HealthCacheDataStore
     fun addHealthValues(values: List<HealthValueEntity>) {
         database.runInTransaction {
             values.forEach {
-                database.healthDao().insert(it)
+                if (isValidEntity(it)) {
+                    database.healthDao().insert(it)
+                }
             }
         }
+    }
+
+    private fun isValidEntity(entity: HealthValueEntity): Boolean {
+        return entity.heartRate in 30..220 && entity.temperature in 10.0..70.0
     }
 }

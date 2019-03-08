@@ -15,7 +15,9 @@ class ImageCacheDataStore
     fun addImages(values: List<ImageEntity>) {
         database.runInTransaction {
             values.forEach {
-                database.imageDao().insert(it)
+                if (it.value.isNotEmpty()) {
+                    database.imageDao().insert(it)
+                }
             }
         }
     }
