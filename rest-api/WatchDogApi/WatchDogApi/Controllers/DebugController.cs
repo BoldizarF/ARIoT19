@@ -8,13 +8,13 @@ namespace WatchDogApi.Controllers
     public class DebugController : ControllerBase
     {
         
-        [HttpGet]
+        [HttpGet("images")]
         public ActionResult<IDictionary<long, string>> Images()
         {
             return ImageStorage.GetDebug();
         }
         
-        [HttpGet]
+        [HttpGet("values")]
         public ActionResult<IDictionary<long, string>> Values()
         {
             return HealthValueStorage.GetDebug();

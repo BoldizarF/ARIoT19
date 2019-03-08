@@ -34,15 +34,7 @@ namespace WatchDogApi
                 options.ExpirationScanFrequency = TimeSpan.FromHours(24);
             });
             
-            services.AddMvc(options =>
-            {
-                options.CacheProfiles.Add("Default",
-                    new CacheProfile()
-                    {
-                        Duration = 6 * 60 * 60
-                    });
-                //    options.Filters.Add(typeof(AuthenticateAttribute));
-            });
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,8 +44,8 @@ namespace WatchDogApi
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Images", action = "Get" });
+                    template: "api/v1/{controller}/{action}",
+                    defaults: new { controller = "Debug", action = "Values" });
             });
         }
     }
