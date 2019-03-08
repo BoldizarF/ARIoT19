@@ -142,6 +142,13 @@ class MainActivity : AppCompatActivity() {
 
             if (result.isEmpty()) return@launch
 
+            if (graphView.series.size > 0) {
+                val latestValue = graphView.series.first().highestValueX
+                if (result.last().timestamp.toDouble() == latestValue) {
+                    return@launch
+                }
+            }
+
             graphView.removeAllSeries()
 
             val dataPoints = result.map {
@@ -154,7 +161,7 @@ class MainActivity : AppCompatActivity() {
             series.isDrawDataPoints = true
             series.dataPointsRadius = 10f
             series.thickness = 8
-            //series.setAnimated(true)
+            series.setAnimated(true)
 
             graphView.addSeries(series)
         }
