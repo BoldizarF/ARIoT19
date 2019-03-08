@@ -12,8 +12,8 @@ import com.aptiv.watchdogapp.data.image.ImageRepository
 
 object Factory {
 
-    fun createMedicalManager(context: Context): MedicalAssistManager {
-        return MedicalAssistManager(context)
+    fun createMedicalManager(): MedicalAssistManager {
+        return MedicalAssistManager()
     }
 
     fun createHealthRepository(context: Context): HealthRepository {

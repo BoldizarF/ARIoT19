@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         setupReycleView()
         bindControlButtons()
 
-        medicalManager = Factory.createMedicalManager(this)
+        medicalManager = Factory.createMedicalManager()
         attackManager = Factory.createAttackManager()
         healthRepository = Factory.createHealthRepository(applicationContext)
         imageRepository = Factory.createImagesRepository(applicationContext)
@@ -192,7 +192,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            medicalManager.checkValues(result)
+            medicalManager.checkValues(this@MainActivity, result)
 
             graphView.removeAllSeries()
 
