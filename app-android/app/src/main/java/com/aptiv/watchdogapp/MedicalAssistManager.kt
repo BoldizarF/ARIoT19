@@ -6,10 +6,14 @@ import com.aptiv.watchdogapp.data.health.HealthValue
 
 class MedicalAssistManager(context: Context) {
 
-    private var alertDialog: AlertDialog? = null
-    private var alertDialogBuilder = AlertDialog.Builder(context)
+    private var alertDialog = AlertDialog.Builder(context)
         .setTitle("Health warning!")
         .setIcon(android.R.drawable.ic_dialog_alert)
+        .setPositiveButton(android.R.string.yes) { dialog, which ->
+        }
+        .setNegativeButton(android.R.string.no) { dialog, which ->
+        }
+        .create()
 
     companion object {
         private const val BAD_MESSAGE = "Are you sure your family member is feeling fine?"
@@ -32,24 +36,15 @@ class MedicalAssistManager(context: Context) {
 
         var message = ""
         if (hasBadHeartRate) {
-            message += "\n- Indication says that the heart rate is bad."
+            message += "\n   - Indication says that the heart rate is bad."
         }
         if (hasBadTemperature) {
-            message += "\n- Indication says that the body temperature is bad."
+            message += "\n   - Indication says that the body temperature is bad."
         }
 
-        if (alertDialog?.isShowing != true && message.isNotEmpty()) {
-            alertDialog = alertDialogBuilder
-                .setMessage(BAD_MESSAGE + message)
-                .setPositiveButton(android.R.string.yes) { dialog, which ->
-                    alertDialog?.dismiss()
-                }
-                .setNegativeButton(android.R.string.no) { dialog, which ->
-                    alertDialog?.dismiss()
-                }
-                .create()
-
-            alertDialog!!.show()
+        if (!alertDialog.isShowing && message.isNotEmpty()) {
+            alertDialog.setMessage(BAD_MESSAGE + message)
+            alertDialog.show()
         }
     }
 }
