@@ -67,9 +67,9 @@ Temperature sensor
 ```
 In addition to those components there is a casing available for 3D printing. The CAD files are available in the "cadfiler" folder in the root of the project.
 
-Print the casing. Fit the components into it. They should all be connected to the wemos. Good luck!
+Print the casing. Fit the components into it. They should all be connected to the wemos.
 
-If everything is correctly connected, you should be able to see some images, temperature and heartbeat data in the application. Good luck!
+If everything is correctly installed, you should be able to see some images, temperature and heartbeat data in the application. Good luck!
 
 ## Project practices
 
