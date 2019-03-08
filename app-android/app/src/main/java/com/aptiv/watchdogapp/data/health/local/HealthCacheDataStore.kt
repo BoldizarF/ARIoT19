@@ -16,10 +16,10 @@ class HealthCacheDataStore
         return database.healthDao().selectAll()
     }
 
-    fun addHealthValues(values: List<HealthValueEntity>) {
+    fun addHealthValues(values: List<HealthValueEntity?>) {
         database.runInTransaction {
             values.forEach {
-                if (isValidEntity(it)) {
+                if (it != null && isValidEntity(it)) {
                     database.healthDao().insert(it)
                 }
             }

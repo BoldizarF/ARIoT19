@@ -26,6 +26,7 @@ import com.aptiv.watchdogapp.data.image.CapturedImage
 import com.aptiv.watchdogapp.util.DateHelper
 import com.aptiv.watchdogapp.util.loadFromBase64
 import com.jjoe64.graphview.DefaultLabelFormatter
+import com.jjoe64.graphview.LegendRenderer
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -96,6 +97,7 @@ class MainActivity : AppCompatActivity() {
         graphView.viewport.setMinY(20.0)
         graphView.viewport.setMaxY(220.0)
         graphView.viewport.isYAxisBoundsManual = true
+        graphView.legendRenderer.align = LegendRenderer.LegendAlign.TOP
 
         val calendar = GregorianCalendar()
         calendar.time = Date()
@@ -110,6 +112,7 @@ class MainActivity : AppCompatActivity() {
         graphView.viewport.setMaxX(endTime.time.toDouble())
         graphView.viewport.isXAxisBoundsManual = true
 
+        graphView.gridLabelRenderer.numHorizontalLabels = 4
         graphView.gridLabelRenderer.labelFormatter = object : DefaultLabelFormatter() {
             override fun formatLabel(value: Double, isValueX: Boolean): String {
                 return if (isValueX) {
@@ -160,6 +163,7 @@ class MainActivity : AppCompatActivity() {
             }.toTypedArray()
 
             val heartRateSeries = LineGraphSeries(heartRateDataPoints).apply {
+                title = "Heart Rate"
                 isDrawBackground = true
                 isDrawDataPoints = true
                 dataPointsRadius = 10f
@@ -172,6 +176,7 @@ class MainActivity : AppCompatActivity() {
             }.toTypedArray()
 
             val temperatureSeries = LineGraphSeries(temperatureDataPoints).apply {
+                title = "Body Temperature"
                 color = Color.GREEN
                 isDrawDataPoints = true
                 dataPointsRadius = 10f
@@ -181,6 +186,8 @@ class MainActivity : AppCompatActivity() {
 
             graphView.addSeries(heartRateSeries)
             graphView.addSeries(temperatureSeries)
+
+            graphView.legendRenderer.isVisible = true
         }
     }
 

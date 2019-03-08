@@ -18,7 +18,11 @@ class HealthRepository
     suspend fun getValues(): List<HealthValue> {
         val remoteValues = remoteDataStore.getRecentHealthValues().map { response ->
             val healthValues = response.value.split(":")
-            HealthValueEntity(response.key, healthValues[0].toInt(), healthValues[1].toDouble())
+            if (healthValues.size == 2) {
+                HealthValueEntity(response.key, healthValues[0].toInt(), healthValues[1].toDouble())
+            } else {
+                null
+            }
         }
 
         cacheDataStore.addHealthValues(remoteValues)
