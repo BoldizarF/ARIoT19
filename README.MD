@@ -56,6 +56,7 @@ IR-sensor
 Rotor encoder (used as odometer)
 USB camera
 ```
+![alt text](https://github.com/BoldizarF/ariot19/blob/master/Cerberus%20car%20sketch.png)
 
 
 Say what the step will be
