@@ -27,6 +27,6 @@ class HealthCacheDataStore
     }
 
     private fun isValidEntity(entity: HealthValueEntity): Boolean {
-        return entity.heartRate in 30..220 && entity.temperature in 10.0..70.0
+        return entity.heartRate in 0..220 && entity.temperature in 0.0..70.0
     }
 }
