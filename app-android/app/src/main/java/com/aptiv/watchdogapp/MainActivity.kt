@@ -209,7 +209,12 @@ class MainActivity : AppCompatActivity() {
                 healthRepository.clearAll()
             }
 
-            val msg = if (result) "Successfully cleared heart rates" else "Unable to clear heart rates"
+            if (result) {
+                graphView.removeAllSeries()
+                graphView.legendRenderer.isVisible = false
+            }
+
+            val msg = if (result) "Successfully cleared health values" else "No health values were cleared."
             Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
         }
     }
@@ -220,9 +225,8 @@ class MainActivity : AppCompatActivity() {
                 attackManager.attack()
             }
 
-            if (!result) {
-                Toast.makeText(this@MainActivity, "Unable to send attack request", Toast.LENGTH_SHORT).show()
-            }
+            val msg = if (result) "Guard Dog is going to attack now!" else "Unable to send attack request"
+            Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
         }
     }
 
