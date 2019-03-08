@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
+    def globalConfig = rootProject.extensions.getByName("ext")
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.aptiv.watchdogapp"
@@ -13,9 +15,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            buildConfigField "String", "SECRET_KEYCODE", "\"" + globalConfig.SECRET_KEYCODE + "\""
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "SECRET_KEYCODE", "\"" + globalConfig.SECRET_KEYCODE + "\""
         }
     }
 }

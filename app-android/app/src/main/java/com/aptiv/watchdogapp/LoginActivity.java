@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private final static String SECRET_KEY_CODE = "11620922"; // Apitv: each position in the alphabet, A=1
+    private final static String SECRET_KEY_CODE = BuildConfig.SECRET_KEYCODE;
 
     private EditText editText;
 
