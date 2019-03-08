@@ -25,6 +25,7 @@ import com.aptiv.watchdogapp.data.attack.AttackManager
 import com.aptiv.watchdogapp.data.image.CapturedImage
 import com.aptiv.watchdogapp.util.DateHelper
 import com.aptiv.watchdogapp.util.loadFromBase64
+import com.aptiv.watchdogapp.util.toggleVisibility
 import com.jjoe64.graphview.DefaultLabelFormatter
 import com.jjoe64.graphview.LegendRenderer
 import java.util.*
@@ -71,18 +72,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onImageClicked(item: CapturedImage) {
+        onImageClicked(item, false)
+    }
+
+    private fun onImageClicked(item: CapturedImage, isNewImage: Boolean) {
         val dialog = Dialog(this)
         dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         val dialogView = layoutInflater.inflate(R.layout.dialog_image, null)
+
+        dialogView.findViewById<ImageView>(R.id.attack_txt).toggleVisibility(isNewImage)
+        dialogView.findViewById<ImageView>(R.id.info_txt).toggleVisibility(isNewImage)
         dialogView.findViewById<ImageView>(R.id.dialog_image).loadFromBase64(item.value)
+
+        dialogView.findViewById<Button>(R.id.attackdialog_btn).apply {
+            toggleVisibility(isNewImage)
+            setOnClickListener {
+                launchAttack()
+            }
+        }
+
         dialogView.findViewById<Button>(R.id.close_btn).setOnClickListener {
             dialog.dismiss()
         }
 
-        dialogView.findViewById<Button>(R.id.delete_btn).setOnClickListener {
-            deleteImage(item.timestamp)
-            dialog.dismiss()
+        dialogView.findViewById<Button>(R.id.delete_btn).apply {
+            toggleVisibility(!isNewImage)
+            setOnClickListener {
+                deleteImage(item.timestamp)
+                dialog.dismiss()
+            }
         }
 
         dialog.setContentView(dialogView)
@@ -125,7 +144,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshData() {
-        retrieveHeartRateData()
+        retrieveHealthData()
         retrieveImages()
     }
 
@@ -141,7 +160,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun retrieveHeartRateData() {
+    private fun retrieveHealthData() {
         uiScope.launch {
             val result = withContext(bgContext) {
                 healthRepository.getValues()
@@ -199,6 +218,11 @@ class MainActivity : AppCompatActivity() {
 
             if (result.isEmpty()) return@launch
 
+            val latestImage = adapter.getImages().firstOrNull()
+            if (latestImage != null && latestImage.timestamp != result.firstOrNull()?.timestamp) {
+                onImageClicked(result.first(), true)
+            }
+
             adapter.addImages(result)
         }
     }
@@ -225,8 +249,9 @@ class MainActivity : AppCompatActivity() {
                 attackManager.attack()
             }
 
-            val msg = if (result) "Guard Dog is going to attack now!" else "Unable to send attack request"
-            Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
+            if (!result) {
+                Toast.makeText(this@MainActivity, "Unable to send attack request", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

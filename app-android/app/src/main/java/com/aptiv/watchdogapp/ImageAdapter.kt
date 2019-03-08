@@ -31,6 +31,10 @@ class ImageAdapter(private val clickListener: ((item: CapturedImage) -> Unit)) :
 
     override fun getItemCount() = photos.size
 
+    fun getImages(): List<CapturedImage> {
+        return photos
+    }
+
     fun addImages(newItems: List<CapturedImage>) {
         if (photos.firstOrNull()?.timestamp == newItems.firstOrNull()?.timestamp) {
             return
