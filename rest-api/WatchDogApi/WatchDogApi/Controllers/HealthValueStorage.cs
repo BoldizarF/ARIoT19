@@ -3,20 +3,11 @@ using System.Collections.Generic;
 
 namespace WatchDogApi.Controllers
 {
-    public sealed class HeartRateStorage
+    public static class HealthValueStorage
     {
         private static readonly object Mutex = new object();
         
         private static readonly Dictionary<long, string> HeartRateValues = new Dictionary<long, string>();
-        
-        private static readonly Lazy<HeartRateStorage> Lazy = new Lazy<HeartRateStorage>(() => new HeartRateStorage());
-
-        public static HeartRateStorage Instance => Lazy.Value;
-
-        private HeartRateStorage()
-        {
-        }
-
         public static void AddNewValue(string value)
         {
             lock (Mutex)
@@ -26,7 +17,7 @@ namespace WatchDogApi.Controllers
             }
         }
 
-        public static Dictionary<long, string> GetHeartRateValues()
+        public static Dictionary<long, string> GetHealthValues()
         {
             lock (Mutex)
             {
@@ -41,6 +32,14 @@ namespace WatchDogApi.Controllers
             lock (Mutex)
             {
                 HeartRateValues.Clear();
+            }
+        }
+        
+        public static Dictionary<long, string> GetDebug()
+        {
+            lock (Mutex)
+            {
+                return HeartRateValues;
             }
         }
     }

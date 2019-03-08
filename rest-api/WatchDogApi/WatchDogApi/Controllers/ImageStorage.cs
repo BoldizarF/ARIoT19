@@ -4,20 +4,12 @@ using System.Collections.Generic;
 
 namespace WatchDogApi.Controllers
 {
-    public sealed class ImageStorage
+    public static class ImageStorage
     {
         private static readonly object Mutex = new object();
         
         private static readonly Dictionary<long, string> Images = new Dictionary<long, string>();
         
-        private static readonly Lazy<ImageStorage> Lazy = new Lazy<ImageStorage>(() => new ImageStorage());
-
-        public static ImageStorage Instance => Lazy.Value;
-
-        private ImageStorage()
-        {
-        }
-
         public static void AddImage(string encodedImage)
         {
             lock (Mutex)
@@ -42,6 +34,14 @@ namespace WatchDogApi.Controllers
             lock (Mutex)
             {
                 Images.Clear();
+            }
+        }
+        
+        public static Dictionary<long, string> GetDebug()
+        {
+            lock (Mutex)
+            {
+                return Images;
             }
         }
     }

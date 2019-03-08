@@ -18,7 +18,7 @@ namespace WatchDogApi.Controllers
                 return Forbid();
             }
             
-            return HeartRateStorage.GetHeartRateValues();
+            return HealthValueStorage.GetHealthValues();
         }
 
         [HttpPost]
@@ -29,7 +29,7 @@ namespace WatchDogApi.Controllers
                 return Forbid();
             }
             
-            HeartRateStorage.AddNewValue(value);
+            HealthValueStorage.AddNewValue(value);
             return Ok();
         }
 
@@ -41,7 +41,7 @@ namespace WatchDogApi.Controllers
                 return Forbid();
             }
             
-            HeartRateStorage.ClearStorage();
+            HealthValueStorage.ClearStorage();
             return Ok();
         }
     }
