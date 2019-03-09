@@ -2,7 +2,9 @@ package com.aptiv.watchdogapp
 
 import android.app.AlertDialog
 import android.content.Context
+import android.util.Log
 import com.aptiv.watchdogapp.data.health.HealthValue
+import java.lang.Exception
 
 class MedicalAssistManager {
 
@@ -35,9 +37,13 @@ class MedicalAssistManager {
             message += "\n   - Indication says that the body temperature is bad."
         }
 
-        if (alertDialog?.isShowing != true && message.isNotEmpty()) {
-            alertDialog = createAlert(context, message)
-            alertDialog?.show()
+        try {
+            if (alertDialog?.isShowing != true && message.isNotEmpty()) {
+                alertDialog = createAlert(context, message)
+                alertDialog?.show()
+            }
+        } catch (ex: Exception) {
+            Log.e("MedicalAssistManager", "Unable to create dialog", ex)
         }
     }
 

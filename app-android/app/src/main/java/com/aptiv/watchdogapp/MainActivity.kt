@@ -20,7 +20,6 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.media.RingtoneManager
-import android.preference.PreferenceManager.getDefaultSharedPreferences
 import android.view.Window
 import android.widget.ImageView
 import android.widget.Toast
@@ -34,9 +33,6 @@ import com.jjoe64.graphview.LegendRenderer
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
-import android.os.VibrationEffect
-import android.os.Build
-import android.os.Vibrator
 import android.util.Log
 
 
@@ -54,15 +50,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var healthRepository: HealthRepository
     private lateinit var imageRepository: ImageRepository
 
-    companion object {
-        private val HOUR_IN_SECONDS = TimeUnit.HOURS.toSeconds(1)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        title = "WatchDog - Dashboard"
 
         setupGraph()
         setupReycleView()
@@ -91,16 +81,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onImageClicked(item: CapturedImage, isNewImage: Boolean) {
-        /*
-                val result = withContext(bgContext) {
-                    healthRepository.getValues()
-                }
-
-                val filteredValues = result.filter {
-                    it.timestamp < item.timestamp - HOUR_IN_SECONDS ||
-                    it.timestamp > item.timestamp + HOUR_IN_SECONDS
-                }
-        */
         if (isNewImage) {
             playSound()
         }
@@ -321,7 +301,11 @@ class MainActivity : AppCompatActivity() {
     private fun schedulePolling() {
         val scheduler = Executors.newSingleThreadScheduledExecutor()
         scheduler.scheduleAtFixedRate({
-            refreshData()
+            try {
+                refreshData()
+            } catch (ex: Exception) {
+                Log.e("MainActivity", "RefreshData crashed", ex)
+            }
         }, 0, 10, TimeUnit.SECONDS)
     }
 

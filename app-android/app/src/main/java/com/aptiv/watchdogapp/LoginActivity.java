@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity implements LoginManager.Cal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        setTitle("WatchDog - Login");
         editText = findViewById(R.id.editText);
 
         loginManager = Factory.INSTANCE.createLoginManager();
