@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupReycleView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recycle_view)
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
+        recyclerView.layoutManager = GridLayoutManager(this, 4)
         adapter = ImageAdapter(::onImageClicked)
         recyclerView.adapter = adapter
     }
