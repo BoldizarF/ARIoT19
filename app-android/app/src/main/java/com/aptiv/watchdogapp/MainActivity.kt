@@ -34,7 +34,7 @@ import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import android.util.Log
-
+import java.util.concurrent.ScheduledExecutorService
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var graphView: GraphView
     private lateinit var adapter : ImageAdapter
+
+    private lateinit var scheduler: ScheduledExecutorService
 
     private lateinit var attackManager: AttackManager
     private lateinit var medicalManager: MedicalAssistManager
@@ -293,13 +295,14 @@ class MainActivity : AppCompatActivity() {
             refreshData()
         }
         findViewById<Button>(R.id.signout_btn).setOnClickListener {
+            scheduler.shutdownNow()
             clearApiKey()
             finish()
         }
     }
 
     private fun schedulePolling() {
-        val scheduler = Executors.newSingleThreadScheduledExecutor()
+        scheduler = Executors.newSingleThreadScheduledExecutor()
         scheduler.scheduleAtFixedRate({
             try {
                 refreshData()
