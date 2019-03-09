@@ -44,15 +44,29 @@ public class LoginActivity extends AppCompatActivity implements LoginManager.Cal
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPref = getSharedPreferences("com.aptiv", Context.MODE_PRIVATE);
+        String apiKey = sharedPref.getString("API_KEY", "");
+        if (apiKey != null && apiKey.length() > 0) {
+            startMainActivity();
+        }
+    }
+
+    @Override
     public void afterLogin(@NonNull String apiKey) {
         if (apiKey.length() > 0) {
             saveApiKey(apiKey);
             editText.setText("");
-            Intent myIntent = new Intent(this, MainActivity.class);
-            startActivity(myIntent);
+            startMainActivity();
         } else {
             Toast.makeText(LoginActivity.this, "Invalid key code", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void startMainActivity() {
+        Intent myIntent = new Intent(this, MainActivity.class);
+        startActivity(myIntent);
     }
 
     private void saveApiKey(String apiKey) {

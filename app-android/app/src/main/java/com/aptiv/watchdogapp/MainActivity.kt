@@ -19,6 +19,7 @@ import kotlinx.coroutines.withContext
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
+import android.media.RingtoneManager
 import android.preference.PreferenceManager.getDefaultSharedPreferences
 import android.view.Window
 import android.widget.ImageView
@@ -33,6 +34,11 @@ import com.jjoe64.graphview.LegendRenderer
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import android.os.VibrationEffect
+import android.os.Build
+import android.os.Vibrator
+import android.util.Log
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -95,6 +101,11 @@ class MainActivity : AppCompatActivity() {
                     it.timestamp > item.timestamp + HOUR_IN_SECONDS
                 }
         */
+        if (isNewImage) {
+            vibrate()
+            playSound()
+        }
+
         val dialog = Dialog(this@MainActivity)
         dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
@@ -288,6 +299,7 @@ class MainActivity : AppCompatActivity() {
             refreshData()
         }
         findViewById<Button>(R.id.signout_btn).setOnClickListener {
+            clearApiKey()
             finish()
         }
     }
@@ -302,5 +314,28 @@ class MainActivity : AppCompatActivity() {
     private fun getApiKey(): String {
         val sharedPref = getSharedPreferences("com.aptiv", Context.MODE_PRIVATE) ?: return ""
         return sharedPref.getString("API_KEY", "")!!
+    }
+
+    private fun clearApiKey() {
+        val sharedPref = getSharedPreferences("com.aptiv", Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putString("API_KEY", "")
+            commit()
+        }
+    }
+
+    private fun vibrate() {
+        val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE))
+    }
+
+    private fun playSound() {
+        try {
+            val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val r = RingtoneManager.getRingtone(applicationContext, notification)
+            r.play()
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Unable to play sound", e)
+        }
     }
 }
