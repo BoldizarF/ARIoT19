@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
         calendar.add(Calendar.HOUR_OF_DAY, 1)
         val endTime = calendar.time
 
-        calendar.add(Calendar.HOUR_OF_DAY, -8)
+        calendar.add(Calendar.HOUR_OF_DAY, -6)
         val startTime = calendar.time
 
         graphView.viewport.setMinX(startTime.time.toDouble())

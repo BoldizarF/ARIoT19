@@ -19,7 +19,8 @@ class HealthRepository
         val remoteValues = remoteDataStore.getRecentHealthValues(apiKey).map { response ->
             val healthValues = response.value.split(":")
             if (healthValues.size == 2) {
-                HealthValueEntity(response.key, healthValues[0].toInt(), healthValues[1].toDouble())
+                val timestamp = response.key * 1000L
+                HealthValueEntity(timestamp, healthValues[0].toInt(), healthValues[1].toDouble())
             } else {
                 null
             }

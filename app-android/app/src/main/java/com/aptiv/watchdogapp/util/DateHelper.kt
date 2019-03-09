@@ -19,6 +19,6 @@ object DateHelper {
 
     fun parseTimestamp(timestamp: Long): Date {
         // convert seconds to milliseconds
-        return Date(timestamp * 1000L)
+        return Date(timestamp)
     }
 }

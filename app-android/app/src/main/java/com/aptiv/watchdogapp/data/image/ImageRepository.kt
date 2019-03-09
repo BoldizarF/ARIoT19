@@ -21,7 +21,8 @@ class ImageRepository
 
     suspend fun getValues(apiKey: String): List<CapturedImage> {
         val remoteValues = remoteDataStore.getRecentHeartRates(apiKey).entries.map {
-            ImageEntity(it.value, it.key)
+            val timestamp = it.key * 1000L
+            ImageEntity(it.value, timestamp)
         }
 
         cacheDataStore.addImages(remoteValues)
