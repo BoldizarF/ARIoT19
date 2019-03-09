@@ -6,6 +6,22 @@ var http = require('http');
 var Gpio = require('onoff').Gpio;
 var led = new Gpio(17, 'out');
 var input = new Gpio(27, 'in', 'falling');
+var nodemailer = require('nodemailer');
+
+var mailOptions = {
+  from: 'solenyatablet@gmail.com',
+  to: 'solenyatablet@gmail.com',
+  subject: 'Intruder detected',
+  text: 'Please check you APP',
+};
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'solenyatablet@gmail.com',
+    pass: 'Aptiv2018!'
+  }
+});
 
 var cloud = {
 	host:   'ariot-env.npn96gumht.us-east-2.elasticbeanstalk.com',
@@ -33,6 +49,14 @@ input.watch( (err, value) => {
 		led.writeSync(1);
 		webcam.capture('temp', (err, data) => {
 			if(err === null) {
+				transporter.sendMail(mailOptions, function(error, info){
+					if (error) {
+				 		console.log(error);
+				 	 } else {
+				    		console.log('Email sent: ' + info.response);
+				  	}
+				});
+
 				var request = http.request(cloud, (res) => {
 					console.log(res.statusMessage);	
 				});
@@ -62,3 +86,6 @@ function unexportOnExit() {
 
 process.on('SIGINT', unexportOnExit);
 console.log("Started...");
+
+
+
