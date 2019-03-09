@@ -17,7 +17,7 @@ What do you want the Assistant to say in response?: ok, attacking your worst ene
 Language: English
 
 
----------------- Make aweb request ----------------------
+---------------- Make a web request ----------------------
 
 URL: http://ariot-env.npn96gumht.us-east-2.elasticbeanstalk.com:80/api/v1/attack?apikey=000
 
