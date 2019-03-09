@@ -102,7 +102,6 @@ class MainActivity : AppCompatActivity() {
                 }
         */
         if (isNewImage) {
-            vibrate()
             playSound()
         }
 
@@ -337,11 +336,6 @@ class MainActivity : AppCompatActivity() {
             putString("API_KEY", "")
             commit()
         }
-    }
-
-    private fun vibrate() {
-        val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE))
     }
 
     private fun playSound() {
