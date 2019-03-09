@@ -144,8 +144,8 @@ class MainActivity : AppCompatActivity() {
         graphView = findViewById(R.id.graph)
 
         graphView.viewport.isScalable = true
-        graphView.viewport.setMinY(-5.0)
-        graphView.viewport.setMaxY(60.0)
+        graphView.viewport.setMinY(20.0)
+        graphView.viewport.setMaxY(180.0)
         graphView.viewport.isYAxisBoundsManual = true
         graphView.legendRenderer.align = LegendRenderer.LegendAlign.TOP
 
