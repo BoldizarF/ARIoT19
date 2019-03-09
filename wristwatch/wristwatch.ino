@@ -1,4 +1,4 @@
-#include "oled.h"
+ #include "oled.h"
 #include "sensors.h"
 #include "locals.h"
 //#include <WiFi.h>
@@ -6,13 +6,16 @@
 //#include <HTTPClient.h>
 #include <WiFi.h>
 #include <HTTPClient.h> 
+#include <math.h>
 
 float hearbeatSensor(void);
 
-PulseSensorPlayground pulseSensor;
-int Threshold = 2000;
+//PulseSensorPlayground pulseSensor;
+int Threshold = 3000;
 const int PulseWire = 34;
 float temp, hb = 0.0f;
+int beep = 0, BPM = 0;
+//int time_bmp = 0;
 
 #define ONE_WIRE_BUS 27
 
@@ -85,7 +88,7 @@ uint32_t i;
 
   }
 
-      Serial.println("WiFi connected!");
+      //Serial.println("WiFi connected!");
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3D for 128x64
     //Serial.println(F("SSD1306 allocation failed"));
@@ -96,16 +99,16 @@ uint32_t i;
 
   sensors.begin();
   
-  pulseSensor.analogInput(PulseWire);   
-  pulseSensor.blinkOnPulse(5);       //auto-magically blink Arduino's LED with heartbeat.
-  pulseSensor.setThreshold(Threshold);  
+  //pulseSensor.analogInput(PulseWire);   
+  //pulseSensor.blinkOnPulse(5);       //auto-magically blink Arduino's LED with heartbeat.
+  //pulseSensor.setThreshold(Threshold);  
    
- if (pulseSensor.begin()) 
+ /*if (pulseSensor.begin()) 
  {display.println("PulseSenor Initialized!");        // un println comme pour écrire sur le port série
  display.display();
  delay(5000);
  display.clearDisplay();
- }
+ }*/
   
 
 display.display();
@@ -163,11 +166,16 @@ drawAxises();
 drawAxises2();
 drawGraph();
 drawGraph2();
+display.display();
+
+///
+  temp = temperature();
+  hb = hearbeatSensor();
+
+///
 tim2 = 0;
 //}
-
-display.display();
-if (tim > 5)
+if (tim > 10)
 {
 //Do this less often
 (void)sendData();
@@ -203,7 +211,8 @@ bool sendData(void)
   req += String(temp);
   req += "\"";
   Serial.println(req);
-  Serial.println(http.POST(req));
+  http.POST(req);
+  //Serial.println();
   http.end();
   
   //delay(2000);
@@ -214,16 +223,49 @@ bool sendData(void)
 
 float hearbeatSensor()
 {
- int myBPM = pulseSensor.getBeatsPerMinute();  // Calls function on our pulseSensor object that returns BPM as an "int".
+  int Signal = 0;
+  int time_bmp = millis();
+  int BPM = 0;
+
+   for (;;)
+   {
+    Signal = analogRead(PulseWire);  // Read the PulseSensor's value.
+                                              // Assign this value to the "Signal" variable.
+
+    Serial.println(Signal);                    // Send the Signal value to Serial Plotter.
+
+
+   if(Signal > Threshold)
+   {                          // If the signal is above "550", then "turn-on" Arduino's on-Board LED.
+     BPM++;
+     }
+    
+    if ( (millis() - time_bmp) > 1000*10.0f)
+     {
+
+       hb = (BPM/16.0f) * 6; //;
+     //Serial.print("BEATPERMINUTE: ");
+     //Serial.print(hb);
+     //Serial.print(BPM);
+     //Serial.print(" ");
+     //Serial.print(hb);
+       break;
+     }
+   delay(10);
+   }
+
+
+  
+ //int myBPM = pulseSensor.getBeatsPerMinute();  // Calls function on our pulseSensor object that returns BPM as an "int".
                                                // "myBPM" hold this BPM value now. 
 
-if (pulseSensor.sawStartOfBeat())
+/*if (pulseSensor.sawStartOfBeat())
 {            // Constantly test to see if "a beat happened". 
   //sendBeatToCloud();
+}*/
+return (float)hb;
 }
 
-return (float)myBPM;
-}
 
 
 void drawGraph()
@@ -231,8 +273,7 @@ void drawGraph()
   int spa = 26;
   uint32_t c = 0;
 
-  temp = temperature();
-    drawHeight = map(round(temp), 15, 47, 0, 32 );
+    drawHeight = map((int)(temp), 15, 47, 0, 32 );
   sensorArray[0] = drawHeight;
 
   for (count = spa; count <= 80+spa; count++ )
@@ -284,7 +325,7 @@ void drawGraph()
   display.setCursor(90+spa, 0);
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.print(drawHeight+15);
+  display.print((int)(temp));
   //display.display();  //needed before anything is displayed
   //display.clearDisplay(); //clear before new drawing
 
@@ -333,9 +374,8 @@ void drawGraph2()
   int he = (display.height()/2)+2;
   int spa = 26;
   uint32_t c = 0;
-
-  hb = hearbeatSensor();
-    drawHeight2 = map(round(hb), 0, 64, 0, 32 );
+  
+    drawHeight2 = map((int)hb, 32, 96, 0, 32 );
   sensorArray2[0] = drawHeight2;
 
   for (count2 = spa; count2 <= 80+spa; count2++ )
@@ -384,10 +424,10 @@ void drawGraph2()
   }
 
   //drawAxises2();
-  display.setCursor(90+spa-3, 0+he);
+  display.setCursor(90+spa-6, 0+he);
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.print(drawHeight2);
+  display.print((int)(hb));
   //display.display();  //needed before anything is displayed
   //display.clearDisplay(); //clear before new drawing
 
@@ -409,7 +449,7 @@ void drawAxises2()  //separate to keep stuff neater. This controls ONLY drawing 
   display.setCursor(90+spa-6, 8+he);
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.print("BMP");
+  display.print("BPM");
 
 
   display.drawLine(spa, 0+he, spa, 32+he, WHITE);
