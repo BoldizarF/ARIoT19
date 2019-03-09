@@ -1,0 +1,29 @@
+Slogan: If You say "attack", then Make a web request
+
+Receive notifications when this Applet runs: false
+
+---------------- Google Assistant ------------------------
+
+Type: Say a simple phrase
+
+What fo you want to say?:  attack
+
+What's another way to say it?: none
+
+And another way?: none
+
+What do you want the Assistant to say in response?: ok, attacking your worst enemy. woff, woff!
+
+Language: English
+
+
+---------------- Make aweb request ----------------------
+
+URL: http://ariot-env.npn96gumht.us-east-2.elasticbeanstalk.com:80/api/v1/attack?apikey=000
+
+Method: POST
+
+Content Type: application/json
+
+Body: true
+
