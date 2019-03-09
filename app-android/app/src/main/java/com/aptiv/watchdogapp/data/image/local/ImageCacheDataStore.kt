@@ -22,6 +22,10 @@ class ImageCacheDataStore
         }
     }
 
+    fun deleteAll(): Boolean {
+        return database.imageDao().deleteAll() > 0
+    }
+
     fun deleteImage(timestamp: Long): Boolean {
         return database.imageDao().delete(timestamp) > 0
     }

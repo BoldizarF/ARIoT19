@@ -52,6 +52,11 @@ class ImageAdapter(private val clickListener: ((item: CapturedImage) -> Unit)) :
         notifyDataSetChanged()
     }
 
+    fun clear() {
+        photos.clear()
+        notifyDataSetChanged()
+    }
+
     class PhotoHolder(view: View, private val clickListener: ((item: CapturedImage) -> Unit)) : RecyclerView.ViewHolder(view) {
         private val timestamp: TextView = view.findViewById(R.id.itemDate)
         private val image: ImageView = view.findViewById(R.id.itemImage)

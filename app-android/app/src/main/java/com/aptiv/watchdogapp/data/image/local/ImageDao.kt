@@ -14,6 +14,9 @@ interface ImageDao {
     @Insert
     fun insert(entity: ImageEntity)
 
+    @Query("DELETE FROM image_items")
+    fun deleteAll(): Int
+
     @Query("DELETE FROM image_items WHERE :timestamp = timestamp")
     fun delete(timestamp: Long): Int
 

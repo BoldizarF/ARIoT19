@@ -11,6 +11,10 @@ class ImageRepository
         private val cacheDataStore: ImageCacheDataStore
     ) {
 
+    fun deleteAll(): Boolean {
+        return cacheDataStore.deleteAll()
+    }
+
     fun deleteImage(timestamp: Long): Boolean {
         return cacheDataStore.deleteImage(timestamp)
     }

@@ -191,6 +191,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun deleteAllImages() {
+        uiScope.launch {
+            val result = withContext(bgContext) {
+                imageRepository.deleteAll()
+            }
+
+            if (result) {
+                adapter.clear()
+            }
+        }
+    }
+
     private fun retrieveHealthData() {
         uiScope.launch {
             val result = withContext(bgContext) {
@@ -291,6 +303,9 @@ class MainActivity : AppCompatActivity() {
     private fun bindControlButtons() {
         findViewById<Button>(R.id.attack_btn).setOnClickListener {
             launchAttack()
+        }
+        findViewById<Button>(R.id.clear_images_btn).setOnClickListener {
+            deleteAllImages()
         }
         findViewById<Button>(R.id.clear_btn).setOnClickListener {
             deleteAllHealthValues()
