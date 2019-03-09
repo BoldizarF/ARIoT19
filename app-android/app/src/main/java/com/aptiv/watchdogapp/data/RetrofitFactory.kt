@@ -1,5 +1,7 @@
 package com.aptiv.watchdogapp.data
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,7 +21,7 @@ class RetrofitFactory {
                 val instance = Retrofit.Builder()
                     .baseUrl(WatchDogApiService.ENDPOINT)
                     .addCallAdapterFactory(CoroutineCallAdapterFactory())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
                     .build()
                     .create(WatchDogApiService::class.java)
 

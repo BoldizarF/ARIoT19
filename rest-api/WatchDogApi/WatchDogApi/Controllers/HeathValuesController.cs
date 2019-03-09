@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WatchDogApi.Storage;
 
 namespace WatchDogApi.Controllers
 {
@@ -13,7 +14,7 @@ namespace WatchDogApi.Controllers
         [HttpGet]
         public ActionResult<IDictionary<long, string>> Get([FromQuery(Name = "apikey")] string apikey)
         {
-            if (apikey != "555")
+            if (!ActiveClientStorage.IsClientAccepted(apikey))
             {
                 return Forbid();
             }

@@ -8,8 +8,8 @@ class HealthRemoteDataStore
         private val api: WatchDogApiService
     ) {
 
-    suspend fun getRecentHealthValues(): Map<Long, String> {
-        return api.getLatestHealthValues().await()
+    suspend fun getRecentHealthValues(apiKey: String): Map<Long, String> {
+        return api.getLatestHealthValues(apiKey).await()
     }
 
 }

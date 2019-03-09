@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using WatchDogApi.Storage;
 
 namespace WatchDogApi.Controllers
 {
@@ -18,6 +19,12 @@ namespace WatchDogApi.Controllers
         public ActionResult<IDictionary<long, string>> Values()
         {
             return HealthValueStorage.GetDebug();
+        }
+        
+        [HttpGet("clients")]
+        public ActionResult<IList<string>> Clients()
+        {
+            return ActiveClientStorage.GetDebug();
         }
     }
 }

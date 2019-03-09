@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace WatchDogApi.Controllers
+namespace WatchDogApi.Storage
 {
     public static class HealthValueStorage
     {

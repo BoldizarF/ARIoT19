@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace WatchDogApi.Controllers
+namespace WatchDogApi.Storage
 {
     public static class ImageStorage
     {

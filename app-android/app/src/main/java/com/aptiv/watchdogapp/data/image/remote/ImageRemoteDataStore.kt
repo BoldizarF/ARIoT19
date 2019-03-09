@@ -8,8 +8,8 @@ class ImageRemoteDataStore
         private val api: WatchDogApiService
     ) {
 
-    suspend fun getRecentHeartRates(): Map<Long, String> {
-        return api.getLatestImages().await()
+    suspend fun getRecentHeartRates(apiKey: String): Map<Long, String> {
+        return api.getLatestImages(apiKey).await()
     }
 
 }

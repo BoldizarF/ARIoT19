@@ -17,7 +17,9 @@ import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
+import android.preference.PreferenceManager.getDefaultSharedPreferences
 import android.view.Window
 import android.widget.ImageView
 import android.widget.Toast
@@ -131,8 +133,8 @@ class MainActivity : AppCompatActivity() {
         graphView = findViewById(R.id.graph)
 
         graphView.viewport.isScalable = true
-        graphView.viewport.setMinY(20.0)
-        graphView.viewport.setMaxY(220.0)
+        graphView.viewport.setMinY(-5.0)
+        graphView.viewport.setMaxY(60.0)
         graphView.viewport.isYAxisBoundsManual = true
         graphView.legendRenderer.align = LegendRenderer.LegendAlign.TOP
 
@@ -181,7 +183,7 @@ class MainActivity : AppCompatActivity() {
     private fun retrieveHealthData() {
         uiScope.launch {
             val result = withContext(bgContext) {
-                healthRepository.getValues()
+                healthRepository.getValues(getApiKey())
             }
 
             if (result.isEmpty()) return@launch
@@ -233,7 +235,7 @@ class MainActivity : AppCompatActivity() {
     private fun retrieveImages() {
         uiScope.launch {
             val result = withContext(bgContext) {
-                imageRepository.getValues()
+                imageRepository.getValues(getApiKey())
             }
 
             if (result.isEmpty()) return@launch
@@ -295,5 +297,10 @@ class MainActivity : AppCompatActivity() {
         scheduler.scheduleAtFixedRate({
             refreshData()
         }, 0, 10, TimeUnit.SECONDS)
+    }
+
+    private fun getApiKey(): String {
+        val sharedPref = getSharedPreferences("com.aptiv", Context.MODE_PRIVATE) ?: return ""
+        return sharedPref.getString("API_KEY", "")!!
     }
 }

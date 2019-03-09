@@ -15,8 +15,8 @@ class ImageRepository
         return cacheDataStore.deleteImage(timestamp)
     }
 
-    suspend fun getValues(): List<CapturedImage> {
-        val remoteValues = remoteDataStore.getRecentHeartRates().entries.map {
+    suspend fun getValues(apiKey: String): List<CapturedImage> {
+        val remoteValues = remoteDataStore.getRecentHeartRates(apiKey).entries.map {
             ImageEntity(it.value, it.key)
         }
 
