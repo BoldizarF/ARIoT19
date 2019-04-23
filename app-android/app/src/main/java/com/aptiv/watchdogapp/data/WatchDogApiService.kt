@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface WatchDogApiService {
 
     companion object {
-        const val ENDPOINT = "http://ariot-env.npn96gumht.us-east-2.elasticbeanstalk.com:80/api/v1/"
+        const val ENDPOINT = "http://watchdog-env.hczkygreee.eu-north-1.elasticbeanstalk.com:80/api/v1/"
     }
 
     @GET("healthvalues")
