@@ -19,7 +19,7 @@ Language: English
 
 ---------------- Make a web request ----------------------
 
-URL: http://ariot-env.npn96gumht.us-east-2.elasticbeanstalk.com:80/api/v1/attack?apikey=000
+URL: http://watchdog-env.hczkygreee.eu-north-1.elasticbeanstalk.com:80/api/v1//attack?apikey=000
 
 Method: POST
 
