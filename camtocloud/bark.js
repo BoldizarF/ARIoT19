@@ -6,7 +6,7 @@ var Gpio = require('onoff').Gpio;
 var bark = new Gpio(22, 'out');
 
 var cloud = {
-        host:   'ariot-env.npn96gumht.us-east-2.elasticbeanstalk.com',
+        host:   'watchdog-env.hczkygreee.eu-north-1.elasticbeanstalk.com',
         port:   80,
         path:   '/api/v1/attack?apikey=000',
         method: 'GET',
