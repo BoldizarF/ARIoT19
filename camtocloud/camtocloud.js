@@ -24,7 +24,7 @@ var transporter = nodemailer.createTransport({
 });
 
 var cloud = {
-	host:   'ariot-env.npn96gumht.us-east-2.elasticbeanstalk.com',
+	host:   'watchdog-env.hczkygreee.eu-north-1.elasticbeanstalk.com',
 	port:   80,
 	path:   '/api/v1/images?apikey=666',
 	method: 'POST',
